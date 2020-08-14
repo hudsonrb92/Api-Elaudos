@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve ApiElaudos
+After=network.target
+
+[Service]
+User=radius
+Group=radius
+WorkingDirectory=/opt/Api-Elaudos
+Environment="PATH=/home/radius/.pyenv/versions/3.8.1/bin"
+ExecStart=/home/radius/.pyenv/versions/3.8.1/bin/gunicorn --workers 3 --bind unix:ApiElaudos.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target

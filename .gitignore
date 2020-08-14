@@ -1,0 +1,8 @@
+.idea
+config.py
+**/__pycache__/
+__pycache__
+*.pyc
+ApiElaudos/*
+.vscode/*
+integration.log
