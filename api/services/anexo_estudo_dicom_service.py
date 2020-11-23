@@ -16,7 +16,8 @@ def listar_anexo_por_identificador_estudo(identificador):
 
 
 def listar_anexo_por_identificador(identificador):
-    anexo = anexo_estudo_dicom_model.AnexoEstudoDicomModel.query.filter_by(identificador=identificador).first()
+    anexo = anexo_estudo_dicom_model.AnexoEstudoDicomModel.query.filter_by(
+        identificador=identificador).first()
     if anexo:
         anexo.conteudo_arquivo = b64encode(anexo.conteudo_arquivo)
         return anexo

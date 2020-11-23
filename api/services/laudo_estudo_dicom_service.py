@@ -1,13 +1,15 @@
 from api import db
-from ..models import laudo_estudo_dicom_model
+from ..models.laudo_estudo_dicom_model import LaudoEstudoDicomModel as lem
 from ..models.estudo_dicom_model import EstudoDicomModel
 from base64 import b64encode
 
 
 def listar_laudos(identificador_estabelecimento_saude):
-    estudos = laudo_estudo_dicom_model.LaudoEstudoDicomModel.query.filter_by(integrado=False).join(
-        EstudoDicomModel).filter_by(
-        identificador_estabelecimento_saude=identificador_estabelecimento_saude).filter_by(situacao='V').all()
+    estudos = lem.query.filter_by(integrado=False)\
+        .join(EstudoDicomModel)\
+        .filter_by(
+        identificador_estabelecimento_saude=identificador_estabelecimento_saude
+    ).filter_by(situacao='V').all()
     return estudos
 
 

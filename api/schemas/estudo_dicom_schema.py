@@ -2,19 +2,23 @@ from marshmallow import fields
 
 from api import ma
 from ..models import estudo_dicom_model
-from .anexo_estudo_dicom_schema import AnexoEstudoDicomSchema
-from .anotacao_estudo_dicom_schema import AnotacaoEstudoDicomSchema
+from marshmallow_sqlalchemy import ModelSchema
 
 
-class EstudoDicomSchema(ma.ModelSchema):
+class EstudoDicomSchema(ModelSchema):
     class Meta:
         model = estudo_dicom_model.EstudoDicomModel
-        fields = ("identificador", "patientname", "identificador_estabelecimento_saude", "chave_primaria_origem",
-                  "studyinstanceuid", "studytime", "patientid", "accessionnumber", "studydescription",
-                  "modalitiesinstudy", "data_hora_inclusao", "data_hora_ultima_alteracao", "situacao_laudo",
-                  "numero_exames_ris", "studyid", "patientsex", "patientbirthdate",
+        fields = ("identificador", "patientname",
+                  "identificador_estabelecimento_saude",
+                  "chave_primaria_origem", "patientbirthdate",
+                  "studyinstanceuid", "studytime", "patientid",
+                  "accessionnumber", "studydescription",
+                  "modalitiesinstudy", "data_hora_inclusao",
+                  "data_hora_ultima_alteracao", "situacao_laudo",
+                  "numero_exames_ris", "studyid", "patientsex",
                   "numberofinstances", "situacao", "nome_mae",
-                  "data_hora_validacao", "anexo_estudo_dicom", "anotacao_estudo_dicom")
+                  "data_hora_validacao", "anexo_estudo_dicom",
+                  "anotacao_estudo_dicom")
 
     identificador = fields.Integer(required=True)
     patientname = fields.String(required=False)
@@ -43,5 +47,3 @@ class EstudoDicomSchema(ma.ModelSchema):
     data_hora_validacao = fields.DateTime(required=False)
     chave_primaria_origem_worklist = fields.Integer(required=False)
     integrado = fields.Boolean(required=True)
-    anexo_estudo_dicom = fields.Nested(AnexoEstudoDicomSchema, many=True, exclude=("conteudo_arquivo",))
-    anotacao_estudo_dicom = fields.Nested(AnotacaoEstudoDicomSchema, many=True)
