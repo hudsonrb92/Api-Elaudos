@@ -7,59 +7,49 @@ from .laudo_estudo_dicom_model import LaudoEstudoDicomModel
 from .integracao_tasy_model import IntegracaoTasyModel
 from .anexo_estudo_dicom_model import AnexoEstudoDicomModel
 from .anotacao_estudo_dicom_model import AnotacaoEstudoDicomModel
+from .convenio_model import ConvenioModel
+from .prioridade_estudo_dicom_model import PrioridadeEstudoDicomModel
 
 
 class EstudoDicomModel(db.Model):
-    __table_args__ = {'schema': 'radius_taas'}
-    __tablename__ = 'estudo_dicom'
+    __table_args__ = {"schema": "radius_taas"}
+    __tablename__ = "estudo_dicom"
 
     identificador: int = db.Column(db.Integer, primary_key=True)
 
     identificador_estabelecimento_saude: int = db.Column(
-        db.Integer,
-        db.ForeignKey('public.estabelecimento_saude.identificador'),
-        nullable=False)
-    estabelecimento_saude = db.relationship(EstabelecimentoSaudeModel,
-                                            backref=db.backref('estudo_dicom',
-                                                               lazy='dynamic'))
+        db.Integer, db.ForeignKey("public.estabelecimento_saude.identificador"), nullable=False
+    )
+    estabelecimento_saude = db.relationship(
+        EstabelecimentoSaudeModel, backref=db.backref("estudo_dicom", lazy="dynamic")
+    )
 
-    laudo_estudo_dicom = db.relationship(
-        LaudoEstudoDicomModel, back_populates="estudo_dicom")
-    integracao_tasy = db.relationship(
-        IntegracaoTasyModel, back_populates="estudo_dicom")
-    anotacao_estudo_dicom = db.relationship(
-        AnotacaoEstudoDicomModel, back_populates="estudo_dicom")
-    anexo_estudo_dicom = db.relationship(
-        AnexoEstudoDicomModel, back_populates="estudo_dicom")
-    identificador_convenio = db.Column(db.Integer(), db.ForeignKey(
-        'radius_taas.convenio.identificador'), nullable=True)
+    laudo_estudo_dicom = db.relationship(LaudoEstudoDicomModel, back_populates="estudo_dicom")
+    integracao_tasy = db.relationship(IntegracaoTasyModel, back_populates="estudo_dicom")
+    anotacao_estudo_dicom = db.relationship(AnotacaoEstudoDicomModel, back_populates="estudo_dicom")
+    anexo_estudo_dicom = db.relationship(AnexoEstudoDicomModel, back_populates="estudo_dicom")
+    identificador_convenio = db.Column(db.Integer(), db.ForeignKey("radius_taas.convenio.identificador"), nullable=True)
     convenio = db.relationship(ConvenioModel, back_populates="estudo_dicom")
-    identificador_prioridade_estudo_dicom = db.Column(db.Integer(),
-                                                      db.ForeignKey(
-        'radius_taas.prioridade_estudo_dicom.identificador'),
-        nullable=False)
-    prioridade_estudo_dicom = db.relationship(
-        "PrioridadeEstudoDicomModel", back_populates="estudo_dicom")
+    identificador_prioridade_estudo_dicom = db.Column(
+        db.Integer(), db.ForeignKey("radius_taas.prioridade_estudo_dicom.identificador"), nullable=False
+    )
+    prioridade_estudo_dicom = db.relationship("PrioridadeEstudoDicomModel", back_populates="estudo_dicom")
 
-    identificador_profissional_saude_direcionado = db.Column(db.Integer(),
-                                                             db.ForeignKey(
-        'public.profissional_saude.identificador'),
-        nullable=True)
+    identificador_profissional_saude_direcionado = db.Column(
+        db.Integer(), db.ForeignKey("public.profissional_saude.identificador"), nullable=True
+    )
 
-    identificador_profissional_saude_operador = db.Column(db.Integer(),
-                                                          db.ForeignKey(
-        'public.profissional_saude.identificador'),
-        nullable=True)
+    identificador_profissional_saude_operador = db.Column(
+        db.Integer(), db.ForeignKey("public.profissional_saude.identificador"), nullable=True
+    )
 
-    identificador_profissional_saude_solicitante = db.Column(db.Integer(),
-                                                             db.ForeignKey(
-        'public.profissional_saude.identificador'),
-        nullable=True)
+    identificador_profissional_saude_solicitante = db.Column(
+        db.Integer(), db.ForeignKey("public.profissional_saude.identificador"), nullable=True
+    )
 
-    identificador_profissional_saude_validacao = db.Column(db.Integer(),
-                                                           db.ForeignKey(
-        'public.profissional_saude.identificador'),
-        nullable=True)
+    identificador_profissional_saude_validacao = db.Column(
+        db.Integer(), db.ForeignKey("public.profissional_saude.identificador"), nullable=True
+    )
 
     chave_primaria_origem = db.Column(db.Integer, nullable=True)
     studyinstanceuid = db.Column(db.String, nullable=False)
@@ -70,8 +60,7 @@ class EstudoDicomModel(db.Model):
     accessionnumber = db.Column(db.String, nullable=True)
     studydescription = db.Column(db.String, nullable=True)
     modalitiesinstudy = db.Column(db.String, nullable=True)
-    data_hora_inclusao = db.Column(
-        db.DateTime, nullable=False, default=datetime.now())
+    data_hora_inclusao = db.Column(db.DateTime, nullable=False, default=datetime.now())
     data_hora_ultima_alteracao = db.Column(db.DateTime, nullable=True)
     situacao_laudo = db.Column(db.String, nullable=False)
     numero_exames_ris = db.Column(db.Integer, nullable=False)

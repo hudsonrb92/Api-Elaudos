@@ -7,7 +7,7 @@ from .pessoa_schema import PessoaSchema
 from ..models import profissional_saude_model
 
 
-class ProfissionalSaudeModelSchema(ma.ModelSchema):
+class ProfissionalSaudeModelSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = profissional_saude_model.ProfissionalSaudeModel
         fields = ("registro_conselho_trabalho", "ativo", "pessoa",

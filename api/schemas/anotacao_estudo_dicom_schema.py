@@ -5,7 +5,7 @@ from api import ma
 from ..models import anotacao_estudo_dicom_model
 from .profissional_saude_schema import ProfissionalSaudeModelSchema
 
-class AnotacaoEstudoDicomSchema(ma.ModelSchema):
+class AnotacaoEstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = anotacao_estudo_dicom_model.AnotacaoEstudoDicomModel
         fields = ("identificador", "identificador_estudo_dicom", "data_hora_registro",

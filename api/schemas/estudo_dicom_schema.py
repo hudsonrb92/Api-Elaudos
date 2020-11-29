@@ -5,7 +5,7 @@ from ..models import estudo_dicom_model
 from marshmallow_sqlalchemy import ModelSchema
 
 
-class EstudoDicomSchema(ModelSchema):
+class EstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = estudo_dicom_model.EstudoDicomModel
         fields = ("identificador", "patientname",

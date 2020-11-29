@@ -25,13 +25,9 @@ class LoginList(Resource):
                     identity=usuario_bd.identificador,
                     expires_delta=timedelta(minutes=30)
                 )
-                return make_response(jsonify({
-                    'access_token': access_token,
-                    'Message': 'Login Realizado com sucesso'
-                }))
-            return make_response(jsonify({
-                'message': 'Credenciais inválidas'
-            }))
+                return make_response(jsonify({'access_token': access_token,
+                                              'Message': 'Login Realizado com sucesso'}))
+            return make_response(jsonify({'message': 'Credenciais inválidas'}))
 
 
 api.add_resource(LoginList, '/api/login')

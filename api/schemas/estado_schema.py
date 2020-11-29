@@ -3,7 +3,7 @@ from ..models import estado_model
 from marshmallow import fields
 
 
-class EstadoSchema(ma.ModelSchema):
+class EstadoSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = estado_model.EstadoModel
         fields = ("nome", "sigla")

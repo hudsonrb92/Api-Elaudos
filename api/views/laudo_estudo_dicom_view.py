@@ -34,13 +34,13 @@ class LaudoEstudoDicomDetail(Resource):
 
     @jwt_required
     def put(self, identificador):
-        logger("Mudando status para integrado.")
+        logger.info("Mudando status para integrado.")
         laudo = laudo_estudo_dicom_service.listar_estudo_por_id(identificador)
         if laudo is None:
-            logger("Identificador não encontrado.")
+            logger.info("Identificador não encontrado.")
             return make_response(jsonify("Laudo Não Encontrado"), 404)
         else:
-            logger("Mudando laudo para integrado.")
+            logger.info("Mudando laudo para integrado.")
             ls = laudo_estudo_dicom_schema.LaudoEstudoDicomSchema()
             laudo_estudo_dicom_service.update_to_integrado(laudo)
             laudo_atualizado = laudo_estudo_dicom_service.listar_estudo_por_id(
@@ -63,6 +63,5 @@ class LaudoEstudoDicomPdf(Resource):
 
 
 api.add_resource(LaudoEstudoDicomDetail, '/api/laudo/<int:identificador>')
-api.add_resource(LaudoEstudoDicomListNoPaginate,
-                 '/api/laudos/<int:identificador_estabelecimento_saude>')
+api.add_resource(LaudoEstudoDicomListNoPaginate,'/api/laudos/<int:identificador_estabelecimento_saude>')
 api.add_resource(LaudoEstudoDicomPdf, '/api/laudopdf/<int:identificador>')

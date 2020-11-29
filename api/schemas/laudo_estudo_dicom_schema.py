@@ -2,7 +2,7 @@ from api import ma
 from ..models import laudo_estudo_dicom_model
 
 
-class LaudoEstudoDicomSchema(ma.ModelSchema):
+class LaudoEstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = laudo_estudo_dicom_model.LaudoEstudoDicomModel
         fields = ("identificador", "identificador_estudo_dicom", "data_hora_emissao",

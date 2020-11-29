@@ -3,7 +3,7 @@ from api import ma
 from ..models import usuario_model
 
 
-class UsuarioSchema(ma.ModelSchema):
+class UsuarioSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = usuario_model.UsuarioModel
         fields = ("login", "senha", "identificador_pessoa", "ativo")

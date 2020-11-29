@@ -3,7 +3,7 @@ from ..models import pessoa_model
 from marshmallow import fields
 
 
-class PessoaSchema(ma.ModelSchema):
+class PessoaSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = pessoa_model.PessoaModel
         fields = ("identificador", "nome", "data_nascimento",

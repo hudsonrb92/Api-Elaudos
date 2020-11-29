@@ -43,7 +43,6 @@ class EstudoDicomDetailStudy(Resource):
         estudo = estudo_dicom_service.listar_estudo_por_studyinstanceuid(
             studyinstanceuid)
         logger.info(f"Study buscado: {studyinstanceuid}")
-        request['sitacao_local']
         if not estudo:
             logger.info("Estudo não encontrado.")
         else:

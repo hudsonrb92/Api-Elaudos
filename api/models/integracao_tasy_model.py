@@ -131,5 +131,4 @@ class IntegracaoTasyModel(db.Model):
     estudo_dicom = db.relationship(
         "EstudoDicomModel", back_populates="integracao_tasy")
     criado_worklist = db.Column(db.Boolean, default=False, nullable=False)
-    laudo_enviado = db.Column(db.Boolean, default=False, nullable=False)
     exame_iniciado = db.Column(db.Boolean, default=False, nullable=False)

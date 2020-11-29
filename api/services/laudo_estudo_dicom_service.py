@@ -14,8 +14,7 @@ def listar_laudos(identificador_estabelecimento_saude):
 
 
 def listar_estudo_por_id(identificador):
-    laudo = laudo_estudo_dicom_model.LaudoEstudoDicomModel.query.filter_by(identificador=identificador).join(
-        EstudoDicomModel).first()
+    laudo = lem.query.filter_by(identificador=identificador).join(EstudoDicomModel).first()
     return laudo
 
 
@@ -25,8 +24,7 @@ def update_to_integrado(laudo):
 
 
 def get_pdf(identificador: int) -> 'pdf in base64':
-    laudo = laudo_estudo_dicom_model.LaudoEstudoDicomModel.query.filter_by(
-        identificador=identificador).first()
+    laudo = lem.query.filter_by(identificador=identificador).first()
     if not laudo:
         raise Exception(f'Error, laudo not found')
     pdf_name = f'{laudo.identificador}-{laudo.data_hora_emissao}'
@@ -38,3 +36,4 @@ def get_pdf(identificador: int) -> 'pdf in base64':
         raise Exception(f'{FileNotFoundError} {e}')
 
     return b64encode(pdf)
+
