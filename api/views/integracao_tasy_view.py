@@ -17,16 +17,15 @@ from ..entidades.integracao_tasy import IntegracaoTasy
 
 class IntegracaoTasyDetail(Resource):
     @jwt_required
-    def get(self, nr_sequencia, nr_prescricao):
-        logger.info(f"Rota de consulta acessada, buscando exame {nr_prescricao}{nr_sequencia}")
+    def get(self, accession):
+        logger.info(f"Rota de consulta acessada, buscando exame {accession}")
         its = IntegracaoTasySchema()
-        itser = busca_por_prescricao(nr_prescricao=nr_prescricao, nr_sequencia=nr_sequencia)
+        itser = busca_por_prescricao(accession)
         response = make_response(its.jsonify(itser), 200)
         return response
 
     @jwt_required
-    def put(self, nr_prescricao, nr_sequencia):
-        accession = f'{nr_prescricao}{nr_sequencia}'
+    def put(self, accession):
         logger.info(f'Alterando exame para cancelado {accession}')
         eds = EstudoDicomSchema()
         exame = invalida_exames(accession)
@@ -81,7 +80,7 @@ class IntegracaoWorklistNotCreated(Resource):
         return make_response(its.jsonify(exames), 200)
 
 
-api.add_resource(IntegracaoTasyDetail, '/api/integracao/<int:nr_prescricao>/<int:nr_sequencia>')
+api.add_resource(IntegracaoTasyDetail, '/api/integracao/<string:accession>')
 api.add_resource(InsereExameIntegracao, '/api/exame-integracao/')
 api.add_resource(IntegracaoTasyListIniciados, '/api/integracao/iniciados/')
 api.add_resource(IntegracaoWorklistNotCreated, '/api/worklist')

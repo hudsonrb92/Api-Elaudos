@@ -165,15 +165,16 @@ def verifica_se_ja_existe(exame):
     return existe
 
 
-def busca_por_prescricao(nr_prescricao, nr_sequencia):
-    existe = itm.query.filter(
-        itm.nr_prescricao == nr_prescricao, itm.nr_sequencia == nr_sequencia).first()
+def busca_por_prescricao(accession):
+    existe = itm.query.filter(itm.identificador_estudo_dicom == estmod.identificador)\
+        .filter(estmod.accessionnumber == accession).first()
+    print(existe)
     return existe
 
 
 def listar_exames_iniciados():
     exams = itm.query.join(estmod, itm.identificador_estudo_dicom == estmod.identificador)\
-        .filter(itm.exame_iniciado == False)\
+        .filter(itm.exame_iniciado==False)\
         .filter(estmod.imagens_disponiveis == True).all()
     return exams
 
