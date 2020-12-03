@@ -18,7 +18,7 @@ class EstudoDicomSchema(ma.SQLAlchemyAutoSchema):
                   "numero_exames_ris", "studyid", "patientsex",
                   "numberofinstances", "situacao", "nome_mae",
                   "data_hora_validacao", "anexo_estudo_dicom",
-                  "anotacao_estudo_dicom")
+                  "anotacao_estudo_dicom, imagens_disponiveis")
 
     identificador = fields.Integer(required=True)
     patientname = fields.String(required=False)

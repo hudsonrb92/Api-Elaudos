@@ -28,11 +28,12 @@ class IntegracaoTasyDetail(Resource):
     def put(self, accession):
         logger.info(f'Alterando exame para cancelado {accession}')
         eds = EstudoDicomSchema()
+        accession = request.json()['accessions']
         exame = invalida_exames(accession)
         if exame:
             return make_response(eds.jsonify(exame), 200)
         else:
-            return make_response(jsonify({'Error': 'Exame não encontrado, ou já iniciado, ou já cancelado'}), 404)
+            return make_response(jsonify({'Error': 'Exame não encontrado, já iniciado ou já cancelado'}), 400)
 
 
 class InsereExameIntegracao(Resource):
@@ -49,6 +50,17 @@ class InsereExameIntegracao(Resource):
         else:
             return make_response(jsonify({"Error": "Exame já cadastrado"}), 208)
 
+    @jwt_required
+    def delete(self):
+        logger.info(f'Alterando exame para cancelado')
+        accession = request.json
+        eds = EstudoDicomSchema()
+        exame = invalida_exames(accession['accessions'])
+        if exame:
+            return make_response(eds.jsonify(exame, many=True), 200)
+        else:
+            return make_response(jsonify({'Error': 'Exame não encontrado, já iniciado ou já cancelado'}), 400)
+
 
 class IntegracaoTasyListIniciados(Resource):
     @jwt_required
@@ -58,7 +70,7 @@ class IntegracaoTasyListIniciados(Resource):
         estudos = listar_exames_iniciados()
         logger.info(estudos)
         if estudos:
-            return make_response(its.jsonify(estudos, many=True))
+            return make_response(its.jsonify(estudos, many=True), 200)
         else:
             return make_response(jsonify({'Message': 'Nenhum exame encontrado'}))
 

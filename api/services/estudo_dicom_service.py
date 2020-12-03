@@ -95,15 +95,16 @@ def check_if_already_exists(estudo):
     return exame
 
 
-def invalida_exames(requisicao: str) -> estudo_dicom_model.EstudoDicomModel:
-    logger.info(f"Invalidando exame {requisicao}")
+def invalida_exames(requisicoes: list) -> estudo_dicom_model.EstudoDicomModel:
+    logger.info(f"Invalidando lista de exames {requisicoes}")
     edm = estudo_dicom_model.EstudoDicomModel
-    exame = edm.query.filter(edm.accessionnumber == requisicao,
-                             edm.imagens_disponiveis == False,
-                             edm.situacao_laudo == 'N',
-                             edm.situacao == 'V').first()
-    if exame:
-        exame.situacao = 'I'
+    edm.query.filter(edm.accessionnumber.in_(requisicoes),
+                     edm.imagens_disponiveis == False,
+                     edm.situacao_laudo == 'N',
+                     edm.situacao == 'V').update({edm.situacao: 'I'}, synchronize_session=False)
+    exames = edm.query.filter(edm.accessionnumber.in_(requisicoes),
+                     edm.imagens_disponiveis == False,
+                     edm.situacao_laudo == 'N',
+                     edm.situacao == 'I').all()
     db.session.commit()
-
-    return exame
+    return exames
