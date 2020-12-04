@@ -78,7 +78,7 @@ class IntegracaoTasyListIniciados(Resource):
     def put(self):
         its = IntegracaoTasySchema()
         logger.info(f'Rota PuT Exames iniciaos')
-        logger.info(request)
+        logger.info(request.__dir__())
         nr_sequencia = request.json['nr_sequencia']
         nr_prescricao = request.json['nr_prescricao']
         exame = exame_iniciado_to_true(nr_prescicao=nr_prescricao, nr_sequencia=nr_sequencia)
