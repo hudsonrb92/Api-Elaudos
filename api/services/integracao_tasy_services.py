@@ -180,11 +180,13 @@ def listar_exames_iniciados():
 
 
 def exame_iniciado_to_true(nr_prescicao: str, nr_sequencia: str) -> itm:
+    logger.info('Alterando para integrado True no banco.')
     sttmnt = itm.query.filter(itm.nr_prescricao == nr_prescicao,
                               itm.nr_sequencia == nr_sequencia)
     exame = sttmnt.first()
     sttmnt.update({itm.exame_iniciado: True}, synchronize_session=False)
     db.session.commit()
+    logger.info("Retornando.")
     return exame
 
 
