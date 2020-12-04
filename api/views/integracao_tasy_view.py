@@ -77,10 +77,9 @@ class IntegracaoTasyListIniciados(Resource):
     @jwt_required
     def put(self):
         its = IntegracaoTasySchema()
-        logger.info(f'Rota PuT Exames iniciaos')
-        logger.info(request.content_lenght)
-        nr_sequencia = request.json['nr_sequencia']
+        logger.info('nr_prescricao' in request.json)
         nr_prescricao = request.json['nr_prescricao']
+        nr_sequencia = request.json['nr_sequencia']
         exame = exame_iniciado_to_true(nr_prescicao=nr_prescricao, nr_sequencia=nr_sequencia)
         if exame:
             return make_response(its.jsonify(exame), 202)
