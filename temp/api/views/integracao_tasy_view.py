@@ -4,14 +4,13 @@ from flask_restful import Resource
 
 from api import api, logger
 from ..schemas.integracao_tasy_schema import IntegracaoTasySchema
+from ..schemas.estudo_dicom_schema import EstudoDicomSchema
 from ..services.integracao_tasy_services import (
     inserir_exame,
     busca_por_prescricao,
     listar_exames_iniciados,
     busca_exames_worklist_false,
-    altera_criado_worklist_true,
-    altera_integrado_tasy,
-    exame_iniciado_to_true)
+    altera_criado_worklist_true)
 from ..services.estudo_dicom_service import invalida_exames
 from ..entidades.integracao_tasy import IntegracaoTasy
 
@@ -27,13 +26,14 @@ class IntegracaoTasyDetail(Resource):
 
     @jwt_required
     def put(self, accession):
-        logger.info(f"Alterado integrado_tasy para true")
-        its = IntegracaoTasySchema()
-        altr = altera_integrado_tasy(accession)
-        if altr:
-            return make_response(its.jsonify(altr), 202)
+        logger.info(f'Alterando exame para cancelado {accession}')
+        eds = EstudoDicomSchema()
+        accession = request.json()['accessions']
+        exame = invalida_exames(accession)
+        if exame:
+            return make_response(eds.jsonify(exame), 200)
         else:
-            return make_response(jsonify({'Error': 'Exame já integrado.'}))
+            return make_response(jsonify({'Error': 'Exame não encontrado, já iniciado ou já cancelado'}), 400)
 
 
 class InsereExameIntegracao(Resource):
@@ -73,19 +73,6 @@ class IntegracaoTasyListIniciados(Resource):
             return make_response(its.jsonify(estudos, many=True), 200)
         else:
             return make_response(jsonify({'Message': 'Nenhum exame encontrado'}))
-
-    @jwt_required
-    def put(self):
-        its = IntegracaoTasySchema()
-        logger.info('Alterando exame para iniciado')
-        nr_prescricao = request.json['nr_prescricao']
-        nr_sequencia = request.json['nr_sequencia']
-        logger.info(f'{request.json}')
-        exame = exame_iniciado_to_true(nr_prescicao=nr_prescricao, nr_sequencia=nr_sequencia)
-        if exame:
-            return make_response(its.jsonify(exame), 202)
-        else:
-            return make_response(jsonify({'Error': 'Exame não encontrado'}), 400)
 
 
 class IntegracaoWorklistNotCreated(Resource):

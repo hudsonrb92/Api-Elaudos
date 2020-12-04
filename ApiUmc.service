@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve ApiTasy
+After=network.target
+
+[Service]
+User=radius
+Group=radius
+WorkingDirectory=/opt/api-tasy
+Environment="PATH=/home/radius/.pyenv/versions/apitasy/bin"
+ExecStart=/home/radius/.pyenv/versions/apitasy/bin/gunicorn --workers 3 --bind unix:ApiTasy.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
