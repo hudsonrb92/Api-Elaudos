@@ -3,6 +3,8 @@ from sqlalchemy import or_
 from ..models import estudo_dicom_model, integracao_tasy_model
 from api import db, logger
 
+itm = integracao_tasy_model.IntegracaoTasyModel
+
 
 def listar_estudos():
     logger.info("Listando exames em geral")
@@ -98,13 +100,15 @@ def check_if_already_exists(estudo):
 def invalida_exames(requisicoes: list) -> estudo_dicom_model.EstudoDicomModel:
     logger.info(f"Invalidando lista de exames {requisicoes}")
     edm = estudo_dicom_model.EstudoDicomModel
-    edm.query.filter(edm.accessionnumber.in_(requisicoes),
-                     edm.imagens_disponiveis == False,
-                     edm.situacao_laudo == 'N',
-                     edm.situacao == 'V').update({edm.situacao: 'I'}, synchronize_session=False)
-    exames = edm.query.filter(edm.accessionnumber.in_(requisicoes),
-                     edm.imagens_disponiveis == False,
-                     edm.situacao_laudo == 'N',
-                     edm.situacao == 'I').all()
+    exames = itm.query.join(edm).filter(
+        edm.accessionnumber.in_(requisicoes),
+        edm.imagens_disponiveis == False,
+        edm.situacao_laudo == 'N',
+        edm.situacao == 'V').all()
+    edm.query.filter(
+        edm.accessionnumber.in_(requisicoes),
+        edm.imagens_disponiveis == False,
+        edm.situacao_laudo == 'N',
+        edm.situacao == 'V').update({edm.situacao: 'I'}, synchronize_session=False)
     db.session.commit()
     return exames

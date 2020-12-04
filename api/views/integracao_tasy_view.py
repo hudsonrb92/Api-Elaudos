@@ -54,10 +54,10 @@ class InsereExameIntegracao(Resource):
     def delete(self):
         logger.info(f'Alterando exame para cancelado')
         accession = request.json
-        eds = EstudoDicomSchema()
+        its = IntegracaoTasySchema()
         exame = invalida_exames(accession['accessions'])
         if exame:
-            return make_response(eds.jsonify(exame, many=True), 200)
+            return make_response(its.jsonify(exame, many=True), 200)
         else:
             return make_response(jsonify({'Error': 'Exame não encontrado, já iniciado ou já cancelado'}), 400)
 
