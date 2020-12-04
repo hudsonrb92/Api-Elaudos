@@ -179,6 +179,15 @@ def listar_exames_iniciados():
     return exams
 
 
+def exame_iniciado_to_true(nr_prescicao: str, nr_sequencia: str) -> itm:
+    sttmnt = itm.query.filter(itm.nr_prescricao == nr_prescicao,
+                              itm.nr_sequencia == nr_sequencia)
+    exame = sttmnt.first()
+    sttmnt.update({itm.exame_iniciado: True}, synchronize_session=False)
+    db.session.commit()
+    return exame
+
+
 def altera_para_iniciado(nr_accession):
     itm.query.join(estmod,
                    itm.identificador_estudo_dicom == estmod.identificador)\
@@ -194,6 +203,15 @@ def busca_exames_worklist_false():
 def altera_criado_worklist_true(nr_prescricao, nr_sequencia):
     sttmt = itm.query.filter(itm.nr_sequencia == nr_sequencia,
                              itm.nr_prescricao == nr_prescricao)
-    sttmt.update({itm.criado_worklist: True})
+    sttmt.update({itm.criado_worklist: True}, synchronize_session=False)
+    db.session.commit()
+    return sttmt.first()
+
+def altera_integrado_tasy(accession):
+    sttmt = itm.query.filter(
+        itm.nr_prescricao == accession[:-1],
+        itm.nr_sequencia == accession[-1:]
+    )
+    sttmt.update({itm.criado_worklist: True}, synchronize_session=False)
     db.session.commit()
     return sttmt.first()
