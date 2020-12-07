@@ -26,7 +26,7 @@ class IntegracaoTasyDetail(Resource):
         return response
 
     @jwt_required
-    def put(self, accession):
+    def post(self, accession):
         logger.info(f"Alterado integrado_tasy para true")
         its = IntegracaoTasySchema()
         altr = altera_integrado_tasy(accession)
@@ -68,7 +68,6 @@ class IntegracaoTasyListIniciados(Resource):
         its = IntegracaoTasySchema()
         logger.info("Buscando exames iniciados")
         estudos = listar_exames_iniciados()
-        logger.info(estudos)
         if estudos:
             return make_response(its.jsonify(estudos, many=True), 200)
         else:
@@ -96,7 +95,7 @@ class IntegracaoWorklistNotCreated(Resource):
         return make_response(its.jsonify(exames, many=True), 200)
 
     @jwt_required
-    def put(self):
+    def post(self):
         its = IntegracaoTasySchema()
         nr_prescricao = request.json['nr_prescricao']
         nr_sequencia = request.json['nr_sequencia']
