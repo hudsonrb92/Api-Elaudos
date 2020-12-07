@@ -75,9 +75,9 @@ class IntegracaoTasyListIniciados(Resource):
             return make_response(jsonify({'Message': 'Nenhum exame encontrado'}))
 
     @jwt_required
-    def put(self):
+    def post(self):
         its = IntegracaoTasySchema()
-        logger.info(request.get_json(force=True))
+        logger.info(request.json.items())
         nr_prescricao = request.json['nr_prescricao']
         nr_sequencia = request.json['nr_sequencia']
         exame = exame_iniciado_to_true(nr_prescicao=nr_prescricao, nr_sequencia=nr_sequencia)
