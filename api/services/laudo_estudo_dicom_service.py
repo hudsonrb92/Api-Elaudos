@@ -28,7 +28,7 @@ def update_to_integrado(laudo):
     db.session.commit()
 
 
-def get_pdf(identificador: int) -> "pdf in base64":
+def get_pdf(identificador: int) -> b64encode:
     laudo = lem.query.filter_by(identificador=identificador).first()
     if not laudo:
         raise Exception(f"Error, laudo not found")
@@ -41,3 +41,16 @@ def get_pdf(identificador: int) -> "pdf in base64":
         raise Exception(f"{FileNotFoundError} {e}")
 
     return b64encode(pdf)
+
+
+def get_laudo_id_estudo(identificador):
+    laudo = lem.query.filter(lem.identificador_estudo_dicom == identificador)
+    return laudo.first()
+
+
+def update_integrado_id_estudo(identificador):
+    sttmt = lem.query.filter(lem.identificador_estudo_dicom == identificador)
+    exame = sttmt.first()
+    if exame:
+        sttmt.update({lem.integrado: True}, synchronize_session=False)
+    return exame
