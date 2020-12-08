@@ -8,5 +8,4 @@ from ..models import anexo_estudo_dicom_model
 class AnexoEstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = anexo_estudo_dicom_model.AnexoEstudoDicomModel
-        fields = ("identificador", "identificador_estudo_dicom", "nome_arquivo",
-                  "descricao", "conteudo_arquivo")
+        fields = ("identificador", "identificador_estudo_dicom", "nome_arquivo", "descricao", "conteudo_arquivo")

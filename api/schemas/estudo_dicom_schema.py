@@ -31,8 +31,6 @@ class EstudoDicomSchema(ma.SQLAlchemyAutoSchema):
             "situacao",
             "nome_mae",
             "data_hora_validacao",
-            "anexo_estudo_dicom",
-            "anotacao_estudo_dicom",
         )
 
     identificador = fields.Integer(required=True)
