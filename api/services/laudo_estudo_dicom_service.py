@@ -5,11 +5,16 @@ from base64 import b64encode
 
 
 def listar_laudos(identificador_estabelecimento_saude):
-    estudos = lem.query.filter_by(integrado=False)\
-        .join(EstudoDicomModel)\
-        .filter_by(
-        identificador_estabelecimento_saude=identificador_estabelecimento_saude
-    ).filter_by(situacao='V').all()
+    estudos = (
+        lem.query.filter_by(integrado=False)
+        .join(EstudoDicomModel)
+        .filter(
+            EstudoDicomModel.identificador_estabelecimento_saude == identificador_estabelecimento_saude,
+            EstudoDicomModel.situacao == "V",
+            EstudoDicomModel.accessionnumber != None,
+        )
+        .all()
+    )
     return estudos
 
 
@@ -23,17 +28,16 @@ def update_to_integrado(laudo):
     db.session.commit()
 
 
-def get_pdf(identificador: int) -> 'pdf in base64':
+def get_pdf(identificador: int) -> "pdf in base64":
     laudo = lem.query.filter_by(identificador=identificador).first()
     if not laudo:
-        raise Exception(f'Error, laudo not found')
-    pdf_name = f'{laudo.identificador}-{laudo.data_hora_emissao}'
-    dir_name = '/data/integracao/laudos/'
+        raise Exception(f"Error, laudo not found")
+    pdf_name = f"{laudo.identificador}-{laudo.data_hora_emissao}"
+    dir_name = "/data/integracao/laudos/"
 
     try:
-        pdf = open(f'{dir_name}{pdf_name}', 'rb').read()
+        pdf = open(f"{dir_name}{pdf_name}", "rb").read()
     except FileNotFoundError as e:
-        raise Exception(f'{FileNotFoundError} {e}')
+        raise Exception(f"{FileNotFoundError} {e}")
 
     return b64encode(pdf)
-

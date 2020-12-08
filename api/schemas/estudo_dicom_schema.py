@@ -8,17 +8,32 @@ from marshmallow_sqlalchemy import ModelSchema
 class EstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = estudo_dicom_model.EstudoDicomModel
-        fields = ("identificador", "patientname",
-                  "identificador_estabelecimento_saude",
-                  "chave_primaria_origem", "patientbirthdate",
-                  "studyinstanceuid", "studytime", "patientid",
-                  "accessionnumber", "studydescription",
-                  "modalitiesinstudy", "data_hora_inclusao",
-                  "data_hora_ultima_alteracao", "situacao_laudo",
-                  "numero_exames_ris", "studyid", "patientsex",
-                  "numberofinstances", "situacao", "nome_mae",
-                  "data_hora_validacao", "anexo_estudo_dicom",
-                  "anotacao_estudo_dicom, imagens_disponiveis")
+        fields = (
+            "identificador",
+            "patientname",
+            "identificador_estabelecimento_saude",
+            "chave_primaria_origem",
+            "patientbirthdate",
+            "studyinstanceuid",
+            "imagens_disponiveis",
+            "studytime",
+            "patientid",
+            "accessionnumber",
+            "studydescription",
+            "modalitiesinstudy",
+            "data_hora_inclusao",
+            "data_hora_ultima_alteracao",
+            "situacao_laudo",
+            "numero_exames_ris",
+            "studyid",
+            "patientsex",
+            "numberofinstances",
+            "situacao",
+            "nome_mae",
+            "data_hora_validacao",
+            "anexo_estudo_dicom",
+            "anotacao_estudo_dicom",
+        )
 
     identificador = fields.Integer(required=True)
     patientname = fields.String(required=False)
@@ -35,6 +50,7 @@ class EstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     situacao_laudo = fields.String(required=False)
     numero_exames_ris = fields.Integer(required=False)
     studyid = fields.String(required=False)
+    integrado = fields.Boolean(required=True)
     patientsex = fields.String(required=False)
     patientbirthdate = fields.String(required=False)
     nome_operador = fields.String(required=False)
@@ -46,4 +62,3 @@ class EstudoDicomSchema(ma.SQLAlchemyAutoSchema):
     origem_registro = fields.String(required=False)
     data_hora_validacao = fields.DateTime(required=False)
     chave_primaria_origem_worklist = fields.Integer(required=False)
-    integrado = fields.Boolean(required=True)
