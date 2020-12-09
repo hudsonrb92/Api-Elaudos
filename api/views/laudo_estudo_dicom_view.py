@@ -65,8 +65,8 @@ class LaudoEstudoDicomIDEstudo(Resource):
             logger.info(f"Nenhum exame encontrado no identificador {identificador}")
             return make_response(jsonify({"Message": "Nenhum exame encontrado"}), 404)
         else:
-            ls = laudo_estudo_dicom_schema.LaudoEstudoDicomSchema
-            return make_response(ls.jsonify(exame), 208)
+            ls = laudo_estudo_dicom_schema.LaudoEstudoDicomSchema()
+            return make_response(ls.jsonify(exame), 202)
 
 
 class LaudoEstudoDicomPdf(Resource):
