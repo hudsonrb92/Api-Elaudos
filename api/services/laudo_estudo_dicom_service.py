@@ -2,7 +2,7 @@ from api import db
 from ..models.laudo_estudo_dicom_model import LaudoEstudoDicomModel as lem
 from ..models.integracao_tasy_model import IntegracaoTasyModel as itm
 from ..models.estudo_dicom_model import EstudoDicomModel as edm
-from ..services import logger
+from ..services.tools import logger
 from base64 import b64encode
 
 
