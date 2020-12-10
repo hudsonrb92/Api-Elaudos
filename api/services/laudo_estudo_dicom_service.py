@@ -54,4 +54,5 @@ def update_integrado_id_estudo(identificador):
     exame = sttmt.first()
     if exame:
         sttmt.update({lem.integrado: True}, synchronize_session=False)
+        db.session.commit()
     return exame
