@@ -2,6 +2,7 @@ from api import db
 from ..models.laudo_estudo_dicom_model import LaudoEstudoDicomModel as lem
 from ..models.integracao_tasy_model import IntegracaoTasyModel as itm
 from ..models.estudo_dicom_model import EstudoDicomModel as edm
+from ..services import logger
 from base64 import b64encode
 
 
@@ -25,6 +26,7 @@ def listar_estudo_por_id(identificador):
 
 def update_to_integrado(laudo):
     laudo.integrado = True
+    logger.info(f"Exame alterado para integrado {laudo.identificador_estudo_dicom} - {laudo.integrado}")
     db.session.commit()
 
 
