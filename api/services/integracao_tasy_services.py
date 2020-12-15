@@ -5,6 +5,7 @@ from ..services.medicos_services import cadastra_medico
 from ..services.estudo_dicom_service import insert_on_taas
 from api import db, logger
 from uuid import uuid4
+
 itm = integracao_tasy_model.IntegracaoTasyModel
 medico = medicos.Medicos
 estudo = estudo_dicom.EstudoDicom
@@ -15,10 +16,8 @@ def inserir_exame(exame):
     logger.info(f"Cadastrando exame {exame.nr_prescricao}{exame.nr_sequencia}")
     if verifica_se_ja_existe(exame):
         return False
-    medico_entidade = medico(
-        crm=exame.nr_crm,
-        uf=exame.uf_medico,
-        nome=exame.nm_medico)
+    # Verifica se médico existe, se não existir é criado.
+    medico_entidade = medico(crm=exame.nr_crm, uf=exame.uf_medico, nome=exame.nm_medico)
     medico_novo = cadastra_medico(medico_entidade)
 
     identificador_solicitante = medico_novo.identificador if medico_novo else None
@@ -33,7 +32,8 @@ def inserir_exame(exame):
         studytime=exame.dt_liberacao[-8:],
         patientsex=exame.ie_sexo,
         medico_sol=identificador_solicitante,
-        studyinstanceuid=str(uuid4()))
+        studyinstanceuid=str(uuid4()),
+    )
     estudo_novo = insert_on_taas(estudo_entidade)
     identificador_novo_estudo = estudo_novo.identificador if estudo_novo else None
     exame_novo = itm(
@@ -153,36 +153,41 @@ def inserir_exame(exame):
         crm_medico_aten_ext=exame.crm_medico_aten_ext,
         nm_social=exame.nm_social,
         ds_email=exame.ds_email,
-        identificador_estudo_dicom=identificador_novo_estudo)
+        identificador_estudo_dicom=identificador_novo_estudo,
+    )
     db.session.add(exame_novo)
     db.session.commit()
     return exame_novo
 
 
 def verifica_se_ja_existe(exame):
-    existe = itm.query.filter(itm.nr_prescricao == exame.nr_prescricao,
-                              itm.nr_sequencia == exame.nr_sequencia).first()
+    existe = itm.query.filter(itm.nr_prescricao == exame.nr_prescricao, itm.nr_sequencia == exame.nr_sequencia).first()
     return existe
 
 
 def busca_por_prescricao(accession):
-    existe = itm.query.filter(itm.identificador_estudo_dicom == estmod.identificador)\
-        .filter(estmod.accessionnumber == accession).first()
+    existe = (
+        itm.query.filter(itm.identificador_estudo_dicom == estmod.identificador)
+        .filter(estmod.accessionnumber == accession)
+        .first()
+    )
     print(existe)
     return existe
 
 
 def listar_exames_iniciados():
-    exams = itm.query.join(estmod, itm.identificador_estudo_dicom == estmod.identificador)\
-        .filter(itm.exame_iniciado==False)\
-        .filter(estmod.imagens_disponiveis == True).all()
+    exams = (
+        itm.query.join(estmod, itm.identificador_estudo_dicom == estmod.identificador)
+        .filter(itm.exame_iniciado == False)
+        .filter(estmod.imagens_disponiveis == True)
+        .all()
+    )
     return exams
 
 
 def exame_iniciado_to_true(nr_prescicao: str, nr_sequencia: str) -> itm:
-    logger.info('Alterando para integrado True no banco.')
-    sttmnt = itm.query.filter(itm.nr_prescricao == nr_prescicao,
-                              itm.nr_sequencia == nr_sequencia)
+    logger.info("Alterando para integrado True no banco.")
+    sttmnt = itm.query.filter(itm.nr_prescricao == nr_prescicao, itm.nr_sequencia == nr_sequencia)
     exame = sttmnt.first()
     sttmnt.update({itm.exame_iniciado: True}, synchronize_session=False)
     db.session.commit()
@@ -191,10 +196,9 @@ def exame_iniciado_to_true(nr_prescicao: str, nr_sequencia: str) -> itm:
 
 
 def altera_para_iniciado(nr_accession):
-    itm.query.join(estmod,
-                   itm.identificador_estudo_dicom == estmod.identificador)\
-        .filter(estmod.accessionnumber == nr_accession)\
-        .first().update({itm.exame_iniciado: True})
+    itm.query.join(estmod, itm.identificador_estudo_dicom == estmod.identificador).filter(
+        estmod.accessionnumber == nr_accession
+    ).first().update({itm.exame_iniciado: True})
 
 
 def busca_exames_worklist_false():
@@ -203,17 +207,14 @@ def busca_exames_worklist_false():
 
 
 def altera_criado_worklist_true(nr_prescricao, nr_sequencia):
-    sttmt = itm.query.filter(itm.nr_sequencia == nr_sequencia,
-                             itm.nr_prescricao == nr_prescricao)
+    sttmt = itm.query.filter(itm.nr_sequencia == nr_sequencia, itm.nr_prescricao == nr_prescricao)
     sttmt.update({itm.criado_worklist: True}, synchronize_session=False)
     db.session.commit()
     return sttmt.first()
 
+
 def altera_integrado_tasy(accession):
-    sttmt = itm.query.filter(
-        itm.nr_prescricao == accession[:-1],
-        itm.nr_sequencia == accession[-1:]
-    )
+    sttmt = itm.query.filter(itm.nr_prescricao == accession[:-1], itm.nr_sequencia == accession[-1:])
     sttmt.update({itm.criado_worklist: True}, synchronize_session=False)
     db.session.commit()
     return sttmt.first()
