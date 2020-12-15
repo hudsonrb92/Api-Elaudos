@@ -52,9 +52,9 @@ class InsereExameIntegracao(Resource):
             return make_response(jsonify({"Error": "Exame já cadastrado"}), 208)
 
     @jwt_required
-    def put(self):
-        logger.info(f"Alterando exame para cancelado")
+    def delete(self):
         accession = request.json
+        logger.info(f"Alterando exame para cancelado {accession.get('accessions')}")
         its = IntegracaoTasySchema()
         exame = invalida_exames(accession["accessions"])
         if exame:
