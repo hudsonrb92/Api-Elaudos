@@ -51,17 +51,6 @@ class InsereExameIntegracao(Resource):
         else:
             return make_response(jsonify({"Error": "Exame já cadastrado"}), 208)
 
-    @jwt_required
-    def delete(self):
-        accession = request.json
-        logger.info(f"Alterando exame para cancelado {accession.get('accessions')}")
-        its = IntegracaoTasySchema()
-        exame = invalida_exames(accession["accessions"])
-        if exame:
-            return make_response(its.jsonify(exame, many=True), 200)
-        else:
-            return make_response(jsonify({"Error": "Exame não encontrado, já iniciado ou já cancelado"}), 400)
-
 
 class IntegracaoTasyListIniciados(Resource):
     @jwt_required
@@ -104,7 +93,21 @@ class IntegracaoWorklistNotCreated(Resource):
         return make_response(its.jsonify(exames), 200)
 
 
+class IntegracaoTasyList(Resource):
+    @jwt_required
+    def delete(self):
+        accession = request.json
+        logger.info(f"Alterando exame para cancelado {accession.get('accessions')}")
+        its = IntegracaoTasySchema()
+        exame = invalida_exames(accession["accessions"])
+        if exame:
+            return make_response(its.jsonify(exame, many=True), 200)
+        else:
+            return make_response(jsonify({"Error": "Exame não encontrado, já iniciado ou já cancelado"}), 400)
+
+
 api.add_resource(IntegracaoTasyDetail, "/api/integracao/<string:accession>")
 api.add_resource(InsereExameIntegracao, "/api/exame-integracao/")
 api.add_resource(IntegracaoTasyListIniciados, "/api/integracao/iniciados/")
 api.add_resource(IntegracaoWorklistNotCreated, "/api/worklist")
+api.add_resource(IntegracaoTasyList, "/api/integracaoList/")
