@@ -97,7 +97,7 @@ class IntegracaoTasyList(Resource):
     @jwt_required
     def delete(self):
         accession = request.json
-        logger.info(f"Alterando exame para cancelado {accession.get('accessions')}")
+        logger.info(f"Alterando exame para cancelado {accession} {type(accession)}")
         its = IntegracaoTasySchema()
         exame = invalida_exames(accession["accessions"])
         if exame:
