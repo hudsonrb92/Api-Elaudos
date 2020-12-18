@@ -17,8 +17,11 @@ def inserir_exame(exame):
     if verifica_se_ja_existe(exame):
         return False
     # Verifica se médico existe, se não existir é criado.
-    medico_entidade = medico(crm=exame.nr_crm, uf=exame.uf_medico, nome=exame.nm_medico)
-    medico_novo = cadastra_medico(medico_entidade)
+    try:
+        medico_entidade = medico(crm=exame.nr_crm, uf=exame.uf_medico, nome=exame.nm_medico)
+        medico_novo = cadastra_medico(medico_entidade)
+    except Exception as excp:
+        logger.error(f"Um erro ocorreu ao tentar cadastrar medico {excp}")
 
     identificador_solicitante = medico_novo.identificador if medico_novo else None
     estudo_entidade = estudo(
