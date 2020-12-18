@@ -101,6 +101,7 @@ def invalida_exames(requisicoes: list) -> estudo_dicom_model.EstudoDicomModel:
     edm = estudo_dicom_model.EstudoDicomModel
     sttms = itm.query.join(edm).filter(edm.accessionnumber.in_(requisicoes))
     exames = sttms.all()
+    logger.info(f"Quantidade de exames encontato é de {len(exames)}")
     edm.query.filter(
         edm.accessionnumber.in_(requisicoes),
         edm.imagens_disponiveis == False,

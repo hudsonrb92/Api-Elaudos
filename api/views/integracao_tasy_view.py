@@ -107,7 +107,7 @@ class IntegracaoTasyList(Resource):
 
 
 api.add_resource(IntegracaoTasyDetail, "/api/integracao/<string:accession>")
-api.add_resource(InsereExameIntegracao, "/api/exame-integracao/")
+api.add_resource(InsereExameIntegracao, "/api/exameIntegracao/")
 api.add_resource(IntegracaoTasyListIniciados, "/api/integracao/iniciados/")
 api.add_resource(IntegracaoWorklistNotCreated, "/api/worklist")
 api.add_resource(IntegracaoTasyList, "/api/integracaoList/")
