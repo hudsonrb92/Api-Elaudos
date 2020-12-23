@@ -44,6 +44,7 @@ class InsereExameIntegracao(Resource):
         validate = its.validate(request.json)
         if validate:
             return make_response(jsonify(validate), 400)
+        logger.info(request.json)
         ite = IntegracaoTasy(**request.json)
         result = inserir_exame(ite)
         if result:
