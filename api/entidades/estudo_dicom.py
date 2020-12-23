@@ -200,6 +200,8 @@ class EstudoDicom:
     def patientname(self, value):
         if value:
             self._patientname = value.upper()
+        else:
+            self._patientname = value
 
     @patientid.setter
     def patientid(self, patientid):

@@ -322,6 +322,8 @@ class IntegracaoTasy:
     def ds_procedimento(self, value):
         if value:
             self._ds_procedimento = value.upper()
+        else:
+            self._ds_procedimento = value
 
     @property
     def ie_lado(self):
@@ -371,6 +373,8 @@ class IntegracaoTasy:
     def nm_pessoa_fisica(self, value):
         if value:
             self._nm_pessoa_fisica = value.upper()
+        else:
+            self._nm_pessoa_fisica = value
 
     @property
     def dt_prescricao(self):
@@ -1172,6 +1176,8 @@ class IntegracaoTasy:
     def nm_social(self, value):
         if value:
             self._nm_social = value.upper()
+        else:
+            self._nm_social = value
 
     @property
     def ds_email(self):
@@ -1197,6 +1203,8 @@ class IntegracaoTasy:
     def nm_sobrenome_mae(self, value):
         if value:
             self._nm_sobrenome_mae = value.upper()
+        else:
+            self._nm_sobrenome_mae = value
 
     @property
     def nm_primeiro_nome(self):
@@ -1206,6 +1214,8 @@ class IntegracaoTasy:
     def nm_primeiro_nome(self, value):
         if value:
             self._nm_primeiro_nome = value.upper()
+        else:
+            self._nm_primeiro_nome = value
 
     @property
     def cancelado(self):
