@@ -129,7 +129,6 @@ class IntegracaoTasy:
         nm_primeiro_nome: Optional[str] = "",
         cancelado: Optional[bool] = False,
     ) -> None:
-
         self._nr_atendimento = nr_atendimento
         self._nr_prescricao = nr_prescricao
         self._nr_sequencia = nr_sequencia
