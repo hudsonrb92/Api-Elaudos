@@ -128,7 +128,9 @@ class IntegracaoTasyModel(db.Model):
         db.ForeignKey("radius_taas.estudo_dicom.identificador"),
         nullable=True,
     )
-    estudo_dicom = db.relationship(
-        "EstudoDicomModel", back_populates="integracao_tasy")
+    estudo_dicom = db.relationship("EstudoDicomModel", back_populates="integracao_tasy")
     criado_worklist = db.Column(db.Boolean, default=False, nullable=False)
     exame_iniciado = db.Column(db.Boolean, default=False, nullable=False)
+    nm_sobrenome_pai = db.Column(db.Stringm, nullable=True)
+    nm_sobrenome_mae = db.Column(db.Stringm, nullable=True)
+    nm_primeiro_nome = db.Column(db.Stringm, nullable=True)
