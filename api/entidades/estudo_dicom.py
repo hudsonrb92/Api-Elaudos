@@ -198,7 +198,7 @@ class EstudoDicom:
 
     @patientname.setter
     def patientname(self, patientname):
-        self._patientname = patientname
+        self._patientname = patientname.upper()
 
     @patientid.setter
     def patientid(self, patientid):

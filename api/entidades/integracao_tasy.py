@@ -1169,7 +1169,7 @@ class IntegracaoTasy:
 
     @nm_social.setter
     def nm_social(self, value):
-        self._nm_social = value
+        self._nm_social = value.upper()
 
     @property
     def ds_email(self):
@@ -1193,7 +1193,7 @@ class IntegracaoTasy:
 
     @nm_sobrenome_mae.setter
     def nm_sobrenome_mae(self, value):
-        self._nm_sobrenome_mae = value
+        self._nm_sobrenome_mae = value.upper()
 
     @property
     def nm_primeiro_nome(self):
@@ -1201,7 +1201,7 @@ class IntegracaoTasy:
 
     @nm_primeiro_nome.setter
     def nm_primeiro_nome(self, value):
-        self._nm_primeiro_nome = value
+        self._nm_primeiro_nome = value.upper()
 
     @property
     def cancelado(self):
