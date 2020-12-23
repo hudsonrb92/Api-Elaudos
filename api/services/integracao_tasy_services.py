@@ -160,10 +160,15 @@ def inserir_exame(exame):
         nm_sobrenome_pai=exame.nm_sobrenome_pai,
         nm_sobrenome_mae=exame.nm_sobrenome_mae,
         nm_primeiro_nome=exame.nm_primeiro_nome,
+        cancelado=exame.cancelado,
         identificador_estudo_dicom=identificador_novo_estudo,
     )
-    db.session.add(exame_novo)
-    db.session.commit()
+    try:
+        db.session.add(exame_novo)
+        db.session.commit()
+    except Exception as expt:
+        logger.error(f"Um erro ocorreu ao tentar cadastrar exame na tabela integração tasy {expt}")
+        raise Exception(f'{expt} encontrou um erro.')
     return exame_novo
 
 

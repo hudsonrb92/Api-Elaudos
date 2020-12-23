@@ -127,6 +127,7 @@ class IntegracaoTasy:
         nm_sobrenome_pai: Optional[str] = "",
         nm_sobrenome_mae: Optional[str] = "",
         nm_primeiro_nome: Optional[str] = "",
+        cancelado: Optional[bool] = False,
     ) -> None:
 
         self.__nr_atendimento = nr_atendimento
@@ -248,6 +249,7 @@ class IntegracaoTasy:
         self.__nm_sobrenome_pai = nm_sobrenome_pai
         self.__nm_sobrenome_mae = nm_sobrenome_mae
         self.__nm_primeiro_nome = nm_primeiro_nome
+        self.__cancelado = cancelado
 
     @property
     def nr_atendimento(self):
@@ -1200,3 +1202,7 @@ class IntegracaoTasy:
     @nm_primeiro_nome.setter
     def nm_primeiro_nome(self, value):
         self.__nm_primeiro_nome = value
+
+    @property
+    def cancelado(self):
+        return self.__cancelado

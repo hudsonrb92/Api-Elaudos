@@ -132,6 +132,7 @@ class IntegracaoTasySchema(ma.SQLAlchemyAutoSchema):
             "nm_sobrenome_pai",
             "nm_sobrenome_mae",
             "nm_primeiro_nome",
+            "cancelado",
         )
 
     identificador = fields.Integer(required=False, default=None, allow_none=True)
@@ -259,3 +260,4 @@ class IntegracaoTasySchema(ma.SQLAlchemyAutoSchema):
     nm_sobrenome_pai = fields.String(required=False, default=None, allow_none=True)
     nm_sobrenome_mae = fields.String(required=False, default=None, allow_none=True)
     nm_primeiro_nome = fields.String(required=False, default=None, allow_none=True)
+    cancelado = fields.String(required=False, default=False, allow_none=True)

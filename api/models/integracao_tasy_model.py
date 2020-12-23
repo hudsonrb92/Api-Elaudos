@@ -134,3 +134,4 @@ class IntegracaoTasyModel(db.Model):
     nm_sobrenome_pai = db.Column(db.String, nullable=True)
     nm_sobrenome_mae = db.Column(db.String, nullable=True)
     nm_primeiro_nome = db.Column(db.String, nullable=True)
+    cancelado = db.Column(db.Boolean, nullable=False, default=False)
