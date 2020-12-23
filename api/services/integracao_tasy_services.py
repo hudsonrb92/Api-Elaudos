@@ -32,7 +32,7 @@ def inserir_exame(exame):
         studydescription=exame.ds_procedimento[0:64],
         studydate=exame.dt_liberacao,
         accessionnumber=f"{exame.nr_prescricao}{exame.nr_sequencia}",
-        modalitiesinstudy=modalidade(exame.ds_local_exec),
+        modalitiesinstudy=modalidade(exame.ds_modalidade),
         studytime=exame.dt_liberacao[-8:],
         patientsex=exame.ie_sexo,
         medico_sol=identificador_solicitante,
@@ -168,7 +168,7 @@ def inserir_exame(exame):
         db.session.commit()
     except Exception as expt:
         logger.error(f"Um erro ocorreu ao tentar cadastrar exame na tabela integração tasy {expt}")
-        raise Exception(f'{expt} encontrou um erro.')
+        raise Exception(f"{expt} encontrou um erro.")
     return exame_novo
 
 

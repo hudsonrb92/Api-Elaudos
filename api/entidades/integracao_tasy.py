@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta
 class IntegracaoTasy:
     """Class to manage interations with table integracao_tasy"""
 
-    def __init__(
+    def _init_(
         self,
         nr_atendimento: int,
         nr_prescricao: int,
@@ -130,1079 +130,1084 @@ class IntegracaoTasy:
         cancelado: Optional[bool] = False,
     ) -> None:
 
-        self.__nr_atendimento = nr_atendimento
-        self.__nr_prescricao = nr_prescricao
-        self.__nr_sequencia = nr_sequencia
-        self.__nr_seq_interno = nr_seq_interno
-        self.__nr_acess_number = nr_acess_number
-        self.__cd_proced_tasy = str(cd_proced_tasy)
-        self.__cd_proced_integracao = str(cd_proced_integracao)
-        self.__cd_proced_tasy_lado = str(cd_proced_tasy_lado)
-        self.__ds_procedimento = str(ds_procedimento)
-        self.__ie_lado = ie_lado
-        self.__ie_urgencia = ie_urgencia
-        self.__dt_prev_execucao = dt_prev_execucao
-        self.__cd_setor_paciente = str(cd_setor_paciente)
-        self.__cd_estabelecimento = str(cd_estabelecimento)
-        self.__nm_pessoa_fisica = nm_pessoa_fisica
-        self.__dt_prescricao = dt_prescricao
-        self.__cd_setor_execucao = str(cd_setor_execucao)
-        self.__dt_liberacao = dt_liberacao
-        self.__cd_software_integracao = str(cd_software_integracao)
-        self.__cd_estab_terceiro = str(cd_estab_terceiro)
-        self.__cd_paciente = str(cd_paciente)
-        self.__cd_prescritor = str(cd_prescritor)
-        self.__ie_sexo = ie_sexo
-        self.__dt_nascimento = dt_nascimento
-        self.__cd_integracao_proc_interno = str(cd_integracao_proc_interno)
-        self.__qt_altura_cm = qt_altura_cm
-        self.__qt_idade_pac = qt_idade_pac
-        self.__qt_peso = qt_peso
-        self.__nr_crm_prescritor = nr_crm_prescritor
-        self.__cd_modalidade_proc = str(cd_modalidade_proc)
-        self.__uf_crm_prescritor = uf_crm_prescritor
-        self.__nr_cpf_paciente = nr_cpf_paciente
-        self.__qt_prescrito = qt_prescrito
-        self.__nr_identidade_paciente = nr_identidade_paciente
-        self.__nr_prontuario_paciente = nr_prontuario_paciente
-        self.__ds_endereco_paciente = ds_endereco_paciente
-        self.__nr_endereco_paciente = nr_endereco_paciente
-        self.__ds_bairro_paciente = str(ds_bairro_paciente)
-        self.__ds_municipio_paciente = ds_municipio_paciente
-        self.__uf_paciente = uf_paciente
-        self.__cd_cep_paciente = str(cd_cep_paciente)
-        self.__nr_telefone_paciente = nr_telefone_paciente
-        self.__cd_convenio = str(cd_convenio)
-        self.__ds_categoria_convenio = ds_categoria_convenio
-        self.__ds_convenio = str(ds_convenio)
-        self.__cd_cgc = str(cd_cgc)
-        self.__nr_seq_motivo_atend = nr_seq_motivo_atend
-        self.__ds_motivo_atend = str(ds_motivo_atend)
-        self.__ds_motivo_suspensao = ds_motivo_suspensao
-        self.__cd_pessoa_fisica = str(cd_pessoa_fisica)
-        self.__cd_procedimento = str(cd_procedimento)
-        self.__cd_tipo_procedimento = str(cd_tipo_procedimento)
-        self.__qt_procedimento = qt_procedimento
-        self.__dt_atualizacao = dt_atualizacao
-        self.__nm_usuario = nm_usuario
-        self.__ds_observacao = str(ds_observacao)
-        self.__ie_origem_proced = ie_origem_proced
-        self.__ds_dado_clinico = str(ds_dado_clinico)
-        self.__ie_suspenso = ie_suspenso
-        self.__cd_setor_atendimento = str(cd_setor_atendimento)
-        self.__cd_medico = str(cd_medico)
-        self.__dt_liberacao_medico = dt_liberacao_medico
-        self.__ie_recem_nato = ie_recem_nato
-        self.__nm_paciente = nm_paciente
-        self.__nr_cpf = nr_cpf
-        self.__nr_prontuario = nr_prontuario
-        self.__nm_medico = nm_medico
-        self.__nr_crm = nr_crm
-        self.__cd_categoria = str(cd_categoria)
-        self.__cd_usuario_convenio = str(cd_usuario_convenio)
-        self.__cd_material_exame = str(cd_material_exame)
-        self.__ds_material_especial = ds_material_especial
-        self.__ie_amostra_entregue = ie_amostra_entregue
-        self.__ds_horarios = str(ds_horarios)
-        self.__nr_seq_exame = nr_seq_exame
-        self.__ds_endereco = str(ds_endereco)
-        self.__nr_endereco = nr_endereco
-        self.__ds_complemento = str(ds_complemento)
-        self.__ds_bairro = str(ds_bairro)
-        self.__ds_municipio = str(ds_municipio)
-        self.__sg_estado = sg_estado
-        self.__nr_telefone = nr_telefone
-        self.__cd_cep = str(cd_cep)
-        self.__ds_setor_paciente = str(ds_setor_paciente)
-        self.__cd_unidade = str(cd_unidade)
-        self.__ie_executar_leito = ie_executar_leito
-        self.__ds_modalidade = str(ds_modalidade)
-        self.__na_accessionnumber = na_accessionnumber
-        self.__ie_tipo_atendimento = ie_tipo_atendimento
-        self.__nr_seq_proc_interno = nr_seq_proc_interno
-        self.__cd_plano_convenio = str(cd_plano_convenio)
-        self.__cd_plano = str(cd_plano)
-        self.__cd_agenda = str(cd_agenda)
-        self.__ds_agenda = str(ds_agenda)
-        self.__cd_procedencia = str(cd_procedencia)
-        self.__ds_procedencia = str(ds_procedencia)
-        self.__cd_compl_conv = str(cd_compl_conv)
-        self.__dt_validade_carteira = str(dt_validade_carteira)
-        self.__dt_resultado = str(dt_resultado)
-        self.__ds_senha = str(ds_senha)
-        self.__nr_cpf_medico = nr_cpf_medico
-        self.__cd_estab_atend = str(cd_estab_atend)
-        self.__cd_estab_prescr = str(cd_estab_prescr)
-        self.__dt_entrada = dt_entrada
-        self.__ds_tipo_atendimento = ds_tipo_atendimento
-        self.__ds_observacao_pf = str(ds_observacao_pf)
-        self.__ds_unidade_atend = str(ds_unidade_atend)
-        self.__ds_plano = str(ds_plano)
-        self.__dt_admissao_hosp = str(dt_admissao_hosp)
-        self.__uf_medico = uf_medico
-        self.__ds_local = str(ds_local)
-        self.__ds_local_exec = str(ds_local_exec)
-        self.__nm_medico_aten_ext = nm_medico_aten_ext
-        self.__crm_medico_aten_ext = crm_medico_aten_ext
-        self.__nm_social = nm_social
-        self.__ds_email = str(ds_email)
-        self.__nm_sobrenome_pai = nm_sobrenome_pai
-        self.__nm_sobrenome_mae = nm_sobrenome_mae
-        self.__nm_primeiro_nome = nm_primeiro_nome
-        self.__cancelado = cancelado
+        self._nr_atendimento = nr_atendimento
+        self._nr_prescricao = nr_prescricao
+        self._nr_sequencia = nr_sequencia
+        self._nr_seq_interno = nr_seq_interno
+        self._nr_acess_number = nr_acess_number
+        self._cd_proced_tasy = cd_proced_tasy
+        self._cd_proced_integracao = cd_proced_integracao
+        self._cd_proced_tasy_lado = cd_proced_tasy_lado
+        self._ds_procedimento = ds_procedimento
+        self._ie_lado = ie_lado
+        self._ie_urgencia = ie_urgencia
+        self._dt_prev_execucao = dt_prev_execucao
+        self._cd_setor_paciente = cd_setor_paciente
+        self._cd_estabelecimento = cd_estabelecimento
+        self._nm_pessoa_fisica = nm_pessoa_fisica
+        self._dt_prescricao = dt_prescricao
+        self._cd_setor_execucao = cd_setor_execucao
+        self._dt_liberacao = dt_liberacao
+        self._cd_software_integracao = cd_software_integracao
+        self._cd_estab_terceiro = cd_estab_terceiro
+        self._cd_paciente = cd_paciente
+        self._cd_prescritor = cd_prescritor
+        self._ie_sexo = ie_sexo
+        self._dt_nascimento = dt_nascimento
+        self._cd_integracao_proc_interno = cd_integracao_proc_interno
+        self._qt_altura_cm = qt_altura_cm
+        self._qt_idade_pac = qt_idade_pac
+        self._qt_peso = qt_peso
+        self._nr_crm_prescritor = nr_crm_prescritor
+        self._cd_modalidade_proc = cd_modalidade_proc
+        self._uf_crm_prescritor = uf_crm_prescritor
+        self._nr_cpf_paciente = nr_cpf_paciente
+        self._qt_prescrito = qt_prescrito
+        self._nr_identidade_paciente = nr_identidade_paciente
+        self._nr_prontuario_paciente = nr_prontuario_paciente
+        self._ds_endereco_paciente = ds_endereco_paciente
+        self._nr_endereco_paciente = nr_endereco_paciente
+        self._ds_bairro_paciente = ds_bairro_paciente
+        self._ds_municipio_paciente = ds_municipio_paciente
+        self._uf_paciente = uf_paciente
+        self._cd_cep_paciente = cd_cep_paciente
+        self._nr_telefone_paciente = nr_telefone_paciente
+        self._cd_convenio = cd_convenio
+        self._ds_categoria_convenio = ds_categoria_convenio
+        self._ds_convenio = ds_convenio
+        self._cd_cgc = cd_cgc
+        self._nr_seq_motivo_atend = nr_seq_motivo_atend
+        self._ds_motivo_atend = ds_motivo_atend
+        self._ds_motivo_suspensao = ds_motivo_suspensao
+        self._cd_pessoa_fisica = cd_pessoa_fisica
+        self._cd_procedimento = cd_procedimento
+        self._cd_tipo_procedimento = cd_tipo_procedimento
+        self._qt_procedimento = qt_procedimento
+        self._dt_atualizacao = dt_atualizacao
+        self._nm_usuario = nm_usuario
+        self._ds_observacao = ds_observacao
+        self._ie_origem_proced = ie_origem_proced
+        self._ds_dado_clinico = ds_dado_clinico
+        self._ie_suspenso = ie_suspenso
+        self._cd_setor_atendimento = cd_setor_atendimento
+        self._cd_medico = cd_medico
+        self._dt_liberacao_medico = dt_liberacao_medico
+        self._ie_recem_nato = ie_recem_nato
+        self._nm_paciente = nm_paciente
+        self._nr_cpf = nr_cpf
+        self._nr_prontuario = nr_prontuario
+        self._nm_medico = nm_medico
+        self._nr_crm = nr_crm
+        self._cd_categoria = cd_categoria
+        self._cd_usuario_convenio = cd_usuario_convenio
+        self._cd_material_exame = cd_material_exame
+        self._ds_material_especial = ds_material_especial
+        self._ie_amostra_entregue = ie_amostra_entregue
+        self._ds_horarios = ds_horarios
+        self._nr_seq_exame = nr_seq_exame
+        self._ds_endereco = ds_endereco
+        self._nr_endereco = nr_endereco
+        self._ds_complemento = ds_complemento
+        self._ds_bairro = ds_bairro
+        self._ds_municipio = ds_municipio
+        self._sg_estado = sg_estado
+        self._nr_telefone = nr_telefone
+        self._cd_cep = cd_cep
+        self._ds_setor_paciente = ds_setor_paciente
+        self._cd_unidade = cd_unidade
+        self._ie_executar_leito = ie_executar_leito
+        self._ds_modalidade = ds_modalidade
+        self._na_accessionnumber = na_accessionnumber
+        self._ie_tipo_atendimento = ie_tipo_atendimento
+        self._nr_seq_proc_interno = nr_seq_proc_interno
+        self._cd_plano_convenio = cd_plano_convenio
+        self._cd_plano = cd_plano
+        self._cd_agenda = cd_agenda
+        self._ds_agenda = ds_agenda
+        self._cd_procedencia = cd_procedencia
+        self._ds_procedencia = ds_procedencia
+        self._cd_compl_conv = cd_compl_conv
+        self._dt_validade_carteira = dt_validade_carteira
+        self._dt_resultado = dt_resultado
+        self._ds_senha = ds_senha
+        self._nr_cpf_medico = nr_cpf_medico
+        self._cd_estab_atend = cd_estab_atend
+        self._cd_estab_prescr = cd_estab_prescr)
+        self._dt_entrada = dt_entrada
+        self._ds_tipo_atendimento = ds_tipo_atendimento
+        self._ds_observacao_pf = ds_observacao_pf
+        self._ds_unidade_atend = ds_unidade_atend
+        self._ds_plano = ds_plano
+        self._dt_admissao_hosp = dt_admissao_hosp
+        self._uf_medico = uf_medico
+        self._ds_local = ds_local
+        self._ds_local_exec = ds_local_exec
+        self._nm_medico_aten_ext = nm_medico_aten_ext
+        self._crm_medico_aten_ext = crm_medico_aten_ext
+        self._nm_social = nm_social
+        self._ds_email = ds_email
+        self._nm_sobrenome_pai = nm_sobrenome_pai
+        self._nm_sobrenome_mae = nm_sobrenome_mae
+        self._nm_primeiro_nome = nm_primeiro_nome
+        self._cancelado = cancelado
 
     @property
     def nr_atendimento(self):
-        return self.__nr_atendimento
+        return self._nr_atendimento
 
     @nr_atendimento.setter
-    def nr_atendimento(self, nr_atendimento):
-        self.__nr_atendimento = nr_atendimento
+    def nr_atendimento(self, value):
+        self._nr_atendimento = value
 
     @property
     def nr_prescricao(self):
-        return self.__nr_prescricao
+        return self._nr_prescricao
 
     @nr_prescricao.setter
-    def nr_prescricao(self, nr_prescricao):
-        self.__nr_prescricao = nr_prescricao
+    def nr_prescricao(self, value):
+        self._nr_prescricao = value
 
     @property
     def nr_sequencia(self):
-        return self.__nr_sequencia
+        return self._nr_sequencia
 
     @nr_sequencia.setter
-    def nr_sequencia(self, nr_sequencia):
-        self.__nr_sequencia = nr_sequencia
+    def nr_sequencia(self, value):
+        self._nr_sequencia = value
 
     @property
     def nr_seq_interno(self):
-        return self.__nr_seq_interno
+        return self._nr_seq_interno
 
     @nr_seq_interno.setter
-    def nr_seq_interno(self, nr_seq_interno):
-        self.__nr_seq_interno = nr_seq_interno
+    def nr_seq_interno(self, value):
+        self._nr_seq_interno = value
 
     @property
     def nr_acess_number(self):
-        return self.__nr_acess_number
+        return self._nr_acess_number
 
     @nr_acess_number.setter
-    def nr_acess_number(self, nr_acess_number):
-        self.__nr_acess_number = nr_acess_number
+    def nr_acess_number(self, value):
+        self._nr_acess_number = value
 
     @property
     def cd_proced_tasy(self):
-        return self.__cd_proced_tasy
+        return self._cd_proced_tasy
 
     @cd_proced_tasy.setter
-    def cd_proced_tasy(self, cd_proced_tasy):
-        self.__cd_proced_tasy = cd_proced_tasy
+    def cd_proced_tasy(self, value):
+        self._cd_proced_tasy = value
 
     @property
     def cd_proced_integracao(self):
-        return self.__cd_proced_integracao
+        return self._cd_proced_integracao
 
     @cd_proced_integracao.setter
-    def cd_proced_integracao(self, cd_proced_integracao):
-        self.__cd_proced_integracao = cd_proced_integracao
+    def cd_proced_integracao(self, value):
+        self._cd_proced_integracao = value
 
     @property
     def cd_proced_tasy_lado(self):
-        return self.__cd_proced_tasy_lado
+        return self._cd_proced_tasy_lado
 
     @cd_proced_tasy_lado.setter
-    def cd_proced_tasy_lado(self, cd_proced_tasy_lado):
-        self.__cd_proced_tasy_lado = cd_proced_tasy_lado
+    def cd_proced_tasy_lado(self, value):
+        self._cd_proced_tasy_lado = value
 
     @property
     def ds_procedimento(self):
-        return self.__ds_procedimento
+        return self._ds_procedimento
 
     @ds_procedimento.setter
     def ds_procedimento(self, ds_procedimento):
-        self.__ds_procedimento = ds_procedimento
+        self._ds_procedimento = ds_procedimento.upper()
 
     @property
     def ie_lado(self):
-        return self.__ie_lado
+        return self._ie_lado
 
     @ie_lado.setter
-    def ie_lado(self, ie_lado):
-        self.__ie_lado = ie_lado
+    def ie_lado(self, value):
+        self._ie_lado = value
 
     @property
     def ie_urgencia(self):
-        return self.__ie_urgencia
+        return self._ie_urgencia
 
     @ie_urgencia.setter
-    def ie_urgencia(self, ie_urgencia):
-        self.__ie_urgencia = ie_urgencia
+    def ie_urgencia(self, value):
+        self._ie_urgencia = value
 
     @property
     def dt_prev_execucao(self):
-        return self.__dt_prev_execucao
+        return self._dt_prev_execucao
 
     @dt_prev_execucao.setter
-    def dt_prev_execucao(self, dt_prev_execucao):
-        self.__dt_prev_execucao = dt_prev_execucao
+    def dt_prev_execucao(self, value):
+        self._dt_prev_execucao = value
 
     @property
     def cd_setor_paciente(self):
-        return self.__cd_setor_paciente
+        return self._cd_setor_paciente
 
     @cd_setor_paciente.setter
-    def cd_setor_paciente(self, cd_setor_paciente):
-        self.__cd_setor_paciente = cd_setor_paciente
+    def cd_setor_paciente(self, value):
+        self._cd_setor_paciente = value
 
     @property
     def cd_estabelecimento(self):
-        return self.__cd_estabelecimento
+        return self._cd_estabelecimento
 
     @cd_estabelecimento.setter
-    def cd_estabelecimento(self, cd_estabelecimento):
-        self.__cd_estabelecimento = cd_estabelecimento
+    def cd_estabelecimento(self, value):
+        self._cd_estabelecimento = value
 
     @property
     def nm_pessoa_fisica(self):
-        return self.__nm_pessoa_fisica
+        return self._nm_pessoa_fisica
 
     @nm_pessoa_fisica.setter
-    def nm_pessoa_fisica(self, nm_pessoa_fisica):
-        self.__nm_pessoa_fisica = nm_pessoa_fisica
+    def nm_pessoa_fisica(self, value):
+        if value:
+            self._nm_pessoa_fisica = value.upper()
 
     @property
     def dt_prescricao(self):
-        return self.__dt_prescricao
+        return self._dt_prescricao
 
     @dt_prescricao.setter
-    def dt_prescricao(self, dt_prescricao):
-        self.__dt_prescricao = dt_prescricao
+    def dt_prescricao(self, value):
+        self._dt_prescricao = value
 
     @property
     def cd_setor_execucao(self):
-        return self.__cd_setor_execucao
+        return self._cd_setor_execucao
 
     @cd_setor_execucao.setter
-    def cd_setor_execucao(self, cd_setor_execucao):
-        self.__cd_setor_execucao = cd_setor_execucao
+    def cd_setor_execucao(self, value):
+        self._cd_setor_execucao = value
 
     @property
     def dt_liberacao(self):
-        return self.__dt_liberacao
+        return self._dt_liberacao
 
     @dt_liberacao.setter
-    def dt_liberacao(self, dt_liberacao):
-        self.__dt_liberacao = dt_liberacao
+    def dt_liberacao(self, value):
+        self._dt_liberacao = value
 
     @property
     def cd_software_integracao(self):
-        return self.__cd_software_integracao
+        return self._cd_software_integracao
 
     @cd_software_integracao.setter
-    def cd_software_integracao(self, cd_software_integracao):
-        self.__cd_software_integracao = cd_software_integracao
+    def cd_software_integracao(self, value):
+        self._cd_software_integracao = value
 
     @property
     def cd_estab_terceiro(self):
-        return self.__cd_estab_terceiro
+        return self._cd_estab_terceiro
 
     @cd_estab_terceiro.setter
-    def cd_estab_terceiro(self, cd_estab_terceiro):
-        self.__cd_estab_terceiro = cd_estab_terceiro
+    def cd_estab_terceiro(self, value):
+        self._cd_estab_terceiro = value
 
     @property
     def cd_paciente(self):
-        return self.__cd_paciente
+        return self._cd_paciente
 
     @cd_paciente.setter
-    def cd_paciente(self, cd_paciente):
-        self.__cd_paciente = cd_paciente
+    def cd_paciente(self, value):
+        self._cd_paciente = value
 
     @property
     def cd_prescritor(self):
-        return self.__cd_prescritor
+        return self._cd_prescritor
 
     @cd_prescritor.setter
-    def cd_prescritor(self, cd_prescritor):
-        self.__cd_prescritor = cd_prescritor
+    def cd_prescritor(self, value):
+        self._cd_prescritor = value
 
     @property
     def ie_sexo(self):
-        return self.__ie_sexo
+        return self._ie_sexo
 
     @ie_sexo.setter
-    def ie_sexo(self, ie_sexo):
-        self.__ie_sexo = ie_sexo
+    def ie_sexo(self, value):
+        self._ie_sexo = value
 
     @property
     def dt_nascimento(self):
-        return self.__dt_nascimento
+        return self._dt_nascimento
 
     @dt_nascimento.setter
-    def dt_nascimento(self, dt_nascimento):
-        self.__dt_nascimento = dt_nascimento
+    def dt_nascimento(self, value):
+        self._dt_nascimento = value
 
     @property
     def cd_integracao_proc_interno(self):
-        return self.__cd_integracao_proc_interno
+        return self._cd_integracao_proc_interno
 
     @cd_integracao_proc_interno.setter
-    def cd_integracao_proc_interno(self, cd_integracao_proc_interno):
-        self.__cd_integracao_proc_interno = cd_integracao_proc_interno
+    def cd_integracao_proc_interno(self, value):
+        self._cd_integracao_proc_interno = value
 
     @property
     def qt_altura_cm(self):
-        return self.__qt_altura_cm
+        return self._qt_altura_cm
 
     @qt_altura_cm.setter
-    def qt_altura_cm(self, qt_altura_cm):
-        self.__qt_altura_cm = qt_altura_cm
+    def qt_altura_cm(self, value):
+        self._qt_altura_cm = value
 
     @property
     def qt_idade_pac(self):
-        return self.__qt_idade_pac
+        return self._qt_idade_pac
 
     @qt_idade_pac.setter
-    def qt_idade_pac(self, qt_idade_pac):
-        self.__qt_idade_pac = qt_idade_pac
+    def qt_idade_pac(self, value):
+        self._qt_idade_pac = value
 
     @property
     def qt_peso(self):
-        return self.__qt_peso
+        return self._qt_peso
 
     @qt_peso.setter
-    def qt_peso(self, qt_peso):
-        self.__qt_peso = qt_peso
+    def qt_peso(self, value):
+        self._qt_peso = value
 
     @property
     def nr_crm_prescritor(self):
-        return self.__nr_crm_prescritor
+        return self._nr_crm_prescritor
 
     @nr_crm_prescritor.setter
-    def nr_crm_prescritor(self, nr_crm_prescritor):
-        self.__nr_crm_prescritor = nr_crm_prescritor
+    def nr_crm_prescritor(self, value):
+        self._nr_crm_prescritor = value
 
     @property
     def cd_modalidade_proc(self):
-        return self.__cd_modalidade_proc
+        return self._cd_modalidade_proc
 
     @cd_modalidade_proc.setter
-    def cd_modalidade_proc(self, cd_modalidade_proc):
-        self.__cd_modalidade_proc = cd_modalidade_proc
+    def cd_modalidade_proc(self, value):
+        self._cd_modalidade_proc = value
 
     @property
     def uf_crm_prescritor(self):
-        return self.__uf_crm_prescritor
+        return self._uf_crm_prescritor
 
     @uf_crm_prescritor.setter
-    def uf_crm_prescritor(self, uf_crm_prescritor):
-        self.__uf_crm_prescritor = uf_crm_prescritor
+    def uf_crm_prescritor(self, value):
+        self._uf_crm_prescritor = value
 
     @property
     def nr_cpf_paciente(self):
-        return self.__nr_cpf_paciente
+        return self._nr_cpf_paciente
 
     @nr_cpf_paciente.setter
-    def nr_cpf_paciente(self, nr_cpf_paciente):
-        self.__nr_cpf_paciente = nr_cpf_paciente
+    def nr_cpf_paciente(self, value):
+        self._nr_cpf_paciente = value
 
     @property
     def qt_prescrito(self):
-        return self.__qt_prescrito
+        return self._qt_prescrito
 
     @qt_prescrito.setter
-    def qt_prescrito(self, qt_prescrito):
-        self.__qt_prescrito = qt_prescrito
+    def qt_prescrito(self, value):
+        self._qt_prescrito = value
 
     @property
     def nr_identidade_paciente(self):
-        return self.__nr_identidade_paciente
+        return self._nr_identidade_paciente
 
     @nr_identidade_paciente.setter
-    def nr_identidade_paciente(self, nr_identidade_paciente):
-        self.__nr_identidade_paciente = nr_identidade_paciente
+    def nr_identidade_paciente(self, value):
+        self._nr_identidade_paciente = value
 
     @property
     def nr_prontuario_paciente(self):
-        return self.__nr_prontuario_paciente
+        return self._nr_prontuario_paciente
 
     @nr_prontuario_paciente.setter
-    def nr_prontuario_paciente(self, nr_prontuario_paciente):
-        self.__nr_prontuario_paciente = nr_prontuario_paciente
+    def nr_prontuario_paciente(self, value):
+        self._nr_prontuario_paciente = value
 
     @property
     def ds_endereco_paciente(self):
-        return self.__ds_endereco_paciente
+        return self._ds_endereco_paciente
 
     @ds_endereco_paciente.setter
-    def ds_endereco_paciente(self, ds_endereco_paciente):
-        self.__ds_endereco_paciente = ds_endereco_paciente
+    def ds_endereco_paciente(self, value):
+        self._ds_endereco_paciente = value
 
     @property
     def nr_endereco_paciente(self):
-        return self.__nr_endereco_paciente
+        return self._nr_endereco_paciente
 
     @nr_endereco_paciente.setter
-    def nr_endereco_paciente(self, nr_endereco_paciente):
-        self.__nr_endereco_paciente = nr_endereco_paciente
+    def nr_endereco_paciente(self, value):
+        self._nr_endereco_paciente = value
 
     @property
     def ds_bairro_paciente(self):
-        return self.__ds_bairro_paciente
+        return self._ds_bairro_paciente
 
     @ds_bairro_paciente.setter
-    def ds_bairro_paciente(self, ds_bairro_paciente):
-        self.__ds_bairro_paciente = ds_bairro_paciente
+    def ds_bairro_paciente(self, value):
+        self._ds_bairro_paciente = value
 
     @property
     def ds_municipio_paciente(self):
-        return self.__ds_municipio_paciente
+        return self._ds_municipio_paciente
 
     @ds_municipio_paciente.setter
-    def ds_municipio_paciente(self, ds_municipio_paciente):
-        self.__ds_municipio_paciente = ds_municipio_paciente
+    def ds_municipio_paciente(self, value):
+        self._ds_municipio_paciente = value
 
     @property
     def uf_paciente(self):
-        return self.__uf_paciente
+        return self._uf_paciente
 
     @uf_paciente.setter
-    def uf_paciente(self, uf_paciente):
-        self.__uf_paciente = uf_paciente
+    def uf_paciente(self, value):
+        self._uf_paciente = value
 
     @property
     def cd_cep_paciente(self):
-        return self.__cd_cep_paciente
+        return self._cd_cep_paciente
 
     @cd_cep_paciente.setter
-    def cd_cep_paciente(self, cd_cep_paciente):
-        self.__cd_cep_paciente = cd_cep_paciente
+    def cd_cep_paciente(self, value):
+        self._cd_cep_paciente = value
 
     @property
     def nr_telefone_paciente(self):
-        return self.__nr_telefone_paciente
+        return self._nr_telefone_paciente
 
     @nr_telefone_paciente.setter
-    def nr_telefone_paciente(self, nr_telefone_paciente):
-        self.__nr_telefone_paciente = nr_telefone_paciente
+    def nr_telefone_paciente(self, value):
+        self._nr_telefone_paciente = value
 
     @property
     def cd_convenio(self):
-        return self.__cd_convenio
+        return self._cd_convenio
 
     @cd_convenio.setter
     def cd_convenio(self, cd_convenio):
-        self.__cd_convenio = cd_convenio
+        self._cd_convenio = cd_convenio
 
     @property
     def ds_categoria_convenio(self):
-        return self.__ds_categoria_convenio
+        return self._ds_categoria_convenio
 
     @ds_categoria_convenio.setter
-    def ds_categoria_convenio(self, ds_categoria_convenio):
-        self.__ds_categoria_convenio = ds_categoria_convenio
+    def ds_categoria_convenio(self, value):
+        self._ds_categoria_convenio = value
 
     @property
     def ds_convenio(self):
-        return self.__ds_convenio
+        return self._ds_convenio
 
     @ds_convenio.setter
-    def ds_convenio(self, ds_convenio):
-        self.__ds_convenio = ds_convenio
+    def ds_convenio(self, value):
+        self._ds_convenio = value
 
     @property
     def cd_cgc(self):
-        return self.__cd_cgc
+        return self._cd_cgc
 
     @cd_cgc.setter
-    def cd_cgc(self, cd_cgc):
-        self.__cd_cgc = cd_cgc
+    def cd_cgc(self, value):
+        self._cd_cgc = value
 
     @property
     def nr_seq_motivo_atend(self):
-        return self.__nr_seq_motivo_atend
+        return self._nr_seq_motivo_atend
 
     @nr_seq_motivo_atend.setter
-    def nr_seq_motivo_atend(self, nr_seq_motivo_atend):
-        self.__nr_seq_motivo_atend = nr_seq_motivo_atend
+    def nr_seq_motivo_atend(self, value):
+        self._nr_seq_motivo_atend = value
 
     @property
     def ds_motivo_atend(self):
-        return self.__ds_motivo_atend
+        return self._ds_motivo_atend
 
     @ds_motivo_atend.setter
-    def ds_motivo_atend(self, ds_motivo_atend):
-        self.__ds_motivo_atend = ds_motivo_atend
+    def ds_motivo_atend(self, value):
+        self._ds_motivo_atend = value
 
     @property
     def ds_motivo_suspensao(self):
-        return self.__ds_motivo_suspensao
+        return self._ds_motivo_suspensao
 
     @ds_motivo_suspensao.setter
-    def ds_motivo_suspensao(self, ds_motivo_suspensao):
-        self.__ds_motivo_suspensao = ds_motivo_suspensao
+    def ds_motivo_suspensao(self, value):
+        self._ds_motivo_suspensao = value
 
     @property
     def cd_pessoa_fisica(self):
-        return self.__cd_pessoa_fisica
+        return self._cd_pessoa_fisica
 
     @cd_pessoa_fisica.setter
-    def cd_pessoa_fisica(self, cd_pessoa_fisica):
-        self.__cd_pessoa_fisica = cd_pessoa_fisica
+    def cd_pessoa_fisica(self, value):
+        self._cd_pessoa_fisica = value
 
     @property
     def cd_procedimento(self):
-        return self.__cd_procedimento
+        return self._cd_procedimento
 
     @cd_procedimento.setter
-    def cd_procedimento(self, cd_procedimento):
-        self.__cd_procedimento = cd_procedimento
+    def cd_procedimento(self, value):
+        self._cd_procedimento = value
 
     @property
     def cd_tipo_procedimento(self):
-        return self.__cd_tipo_procedimento
+        return self._cd_tipo_procedimento
 
     @cd_tipo_procedimento.setter
-    def cd_tipo_procedimento(self, cd_tipo_procedimento):
-        self.__cd_tipo_procedimento = cd_tipo_procedimento
+    def cd_tipo_procedimento(self, value):
+        self._cd_tipo_procedimento = value
 
     @property
     def qt_procedimento(self):
-        return self.__qt_procedimento
+        return self._qt_procedimento
 
     @qt_procedimento.setter
-    def qt_procedimento(self, qt_procedimento):
-        self.__qt_procedimento = qt_procedimento
+    def qt_procedimento(self, value):
+        self._qt_procedimento = value
 
     @property
     def dt_atualizacao(self):
-        return self.__dt_atualizacao
+        return self._dt_atualizacao
 
     @dt_atualizacao.setter
-    def dt_atualizacao(self, dt_atualizacao):
-        self.__dt_atualizacao = dt_atualizacao
+    def dt_atualizacao(self, value):
+        self._dt_atualizacao = value
 
     @property
     def nm_usuario(self):
-        return self.__nm_usuario
+        return self._nm_usuario
 
     @nm_usuario.setter
-    def nm_usuario(self, nm_usuario):
-        self.__nm_usuario = nm_usuario
+    def nm_usuario(self, value):
+        self._nm_usuario = value
 
     @property
     def ds_observacao(self):
-        return self.__ds_observacao
+        return self._ds_observacao
 
     @ds_observacao.setter
-    def ds_observacao(self, ds_observacao):
-        self.__ds_observacao = ds_observacao
+    def ds_observacao(self, value):
+        self._ds_observacao = value
 
     @property
     def ie_origem_proced(self):
-        return self.__ie_origem_proced
+        return self._ie_origem_proced
 
     @ie_origem_proced.setter
-    def ie_origem_proced(self, ie_origem_proced):
-        self.__ie_origem_proced = ie_origem_proced
+    def ie_origem_proced(self, value):
+        self._ie_origem_proced = value
 
     @property
     def ds_dado_clinico(self):
-        return self.__ds_dado_clinico
+        return self._ds_dado_clinico
 
     @ds_dado_clinico.setter
-    def ds_dado_clinico(self, ds_dado_clinico):
-        self.__ds_dado_clinico = ds_dado_clinico
+    def ds_dado_clinico(self, value):
+        self._ds_dado_clinico = value
 
     @property
     def ie_suspenso(self):
-        return self.__ie_suspenso
+        return self._ie_suspenso
 
     @ie_suspenso.setter
-    def ie_suspenso(self, ie_suspenso):
-        self.__ie_suspenso = ie_suspenso
+    def ie_suspenso(self, value):
+        self._ie_suspenso = value
 
     @property
     def cd_setor_atendimento(self):
-        return self.__cd_setor_atendimento
+        return self._cd_setor_atendimento
 
     @cd_setor_atendimento.setter
-    def cd_setor_atendimento(self, cd_setor_atendimento):
-        self.__cd_setor_atendimento = cd_setor_atendimento
+    def cd_setor_atendimento(self, value):
+        self._cd_setor_atendimento = value
 
     @property
     def cd_medico(self):
-        return self.__cd_medico
+        return self._cd_medico
 
     @cd_medico.setter
-    def cd_medico(self, cd_medico):
-        self.__cd_medico = cd_medico
+    def cd_medico(self, value):
+        self._cd_medico = value
 
     @property
     def dt_liberacao_medico(self):
-        return self.__dt_liberacao_medico
+        return self._dt_liberacao_medico
 
     @dt_liberacao_medico.setter
-    def dt_liberacao_medico(self, dt_liberacao_medico):
-        self.__dt_liberacao_medico = dt_liberacao_medico
+    def dt_liberacao_medico(self, value):
+        self._dt_liberacao_medico = value
 
     @property
     def ie_recem_nato(self):
-        return self.__ie_recem_nato
+        return self._ie_recem_nato
 
     @ie_recem_nato.setter
-    def ie_recem_nato(self, ie_recem_nato):
-        self.__ie_recem_nato = ie_recem_nato
+    def ie_recem_nato(self, value):
+        self._ie_recem_nato = value
 
     @property
     def nm_paciente(self):
-        return self.__nm_paciente
+        return self._nm_paciente
 
     @nm_paciente.setter
-    def nm_paciente(self, nm_paciente):
-        self.__nm_paciente = nm_paciente
+    def nm_paciente(self, value):
+        self._nm_paciente = value
 
     @property
     def nr_cpf(self):
-        return self.__nr_cpf
+        return self._nr_cpf
 
     @nr_cpf.setter
-    def nr_cpf(self, nr_cpf):
-        self.__nr_cpf = nr_cpf
+    def nr_cpf(self, value):
+        self._nr_cpf = value
 
     @property
     def nr_prontuario(self):
-        return self.__nr_prontuario
+        return self._nr_prontuario
 
     @nr_prontuario.setter
-    def nr_prontuario(self, nr_prontuario):
-        self.__nr_prontuario = nr_prontuario
+    def nr_prontuario(self, value):
+        self._nr_prontuario = value
 
     @property
     def nm_medico(self):
-        return self.__nm_medico
+        return self._nm_medico
 
     @nm_medico.setter
-    def nm_medico(self, nm_medico):
-        self.__nm_medico = nm_medico
+    def nm_medico(self, value):
+        self._nm_medico = value
 
     @property
     def nr_crm(self):
-        return self.__nr_crm
+        return self._nr_crm
 
     @nr_crm.setter
-    def nr_crm(self, nr_crm):
-        self.__nr_crm = nr_crm
+    def nr_crm(self, value):
+        self._nr_crm = value
 
     @property
     def cd_categoria(self):
-        return self.__cd_categoria
+        return self._cd_categoria
 
     @cd_categoria.setter
-    def cd_categoria(self, cd_categoria):
-        self.__cd_categoria = cd_categoria
+    def cd_categoria(self, value):
+        self._cd_categoria = value
 
     @property
     def cd_usuario_convenio(self):
-        return self.__cd_usuario_convenio
+        return self._cd_usuario_convenio
 
     @cd_usuario_convenio.setter
-    def cd_usuario_convenio(self, cd_usuario_convenio):
-        self.__cd_usuario_convenio = cd_usuario_convenio
+    def cd_usuario_convenio(self, value):
+        self._cd_usuario_convenio = value
 
     @property
     def cd_material_exame(self):
-        return self.__cd_material_exame
+        return self._cd_material_exame
 
     @cd_material_exame.setter
-    def cd_material_exame(self, cd_material_exame):
-        self.__cd_material_exame = cd_material_exame
+    def cd_material_exame(self, value):
+        self._cd_material_exame = value
 
     @property
     def ds_material_especial(self):
-        return self.__ds_material_especial
+        return self._ds_material_especial
 
     @ds_material_especial.setter
-    def ds_material_especial(self, ds_material_especial):
-        self.__ds_material_especial = ds_material_especial
+    def ds_material_especial(self, value):
+        self._ds_material_especial = value
 
     @property
     def ie_amostra_entregue(self):
-        return self.__ie_amostra_entregue
+        return self._ie_amostra_entregue
 
     @ie_amostra_entregue.setter
-    def ie_amostra_entregue(self, ie_amostra_entregue):
-        self.__ie_amostra_entregue = ie_amostra_entregue
+    def ie_amostra_entregue(self, value):
+        self._ie_amostra_entregue = value
 
     @property
     def ds_horarios(self):
-        return self.__ds_horarios
+        return self._ds_horarios
 
     @ds_horarios.setter
-    def ds_horarios(self, ds_horarios):
-        self.__ds_horarios = ds_horarios
+    def ds_horarios(self, value):
+        self._ds_horarios = value
 
     @property
     def nr_seq_exame(self):
-        return self.__nr_seq_exame
+        return self._nr_seq_exame
 
     @nr_seq_exame.setter
-    def nr_seq_exame(self, nr_seq_exame):
-        self.__nr_seq_exame = nr_seq_exame
+    def nr_seq_exame(self, value):
+        self._nr_seq_exame = value
 
     @property
     def ds_endereco(self):
-        return self.__ds_endereco
+        return self._ds_endereco
 
     @ds_endereco.setter
-    def ds_endereco(self, ds_endereco):
-        self.__ds_endereco = ds_endereco
+    def ds_endereco(self, value):
+        self._ds_endereco = value
 
     @property
     def nr_endereco(self):
-        return self.__nr_endereco
+        return self._nr_endereco
 
     @nr_endereco.setter
-    def nr_endereco(self, nr_endereco):
-        self.__nr_endereco = nr_endereco
+    def nr_endereco(self, value):
+        self._nr_endereco = value
 
     @property
     def ds_complemento(self):
-        return self.__ds_complemento
+        return self._ds_complemento
 
     @ds_complemento.setter
-    def ds_complemento(self, ds_complemento):
-        self.__ds_complemento = ds_complemento
+    def ds_complemento(self, value):
+        self._ds_complemento = value
 
     @property
     def ds_bairro(self):
-        return self.__ds_bairro
+        return self._ds_bairro
 
     @ds_bairro.setter
-    def ds_bairro(self, ds_bairro):
-        self.__ds_bairro = ds_bairro
+    def ds_bairro(self, value):
+        self._ds_bairro = value
 
     @property
     def ds_municipio(self):
-        return self.__ds_municipio
+        return self._ds_municipio
 
     @ds_municipio.setter
-    def ds_municipio(self, ds_municipio):
-        self.__ds_municipio = ds_municipio
+    def ds_municipio(self, value):
+        self._ds_municipio = value
 
     @property
     def sg_estado(self):
-        return self.__sg_estado
+        return self._sg_estado
 
     @sg_estado.setter
-    def sg_estado(self, sg_estado):
-        self.__sg_estado = sg_estado
+    def sg_estado(self, value):
+        self._sg_estado = value
 
     @property
     def nr_telefone(self):
-        return self.__nr_telefone
+        return self._nr_telefone
 
     @nr_telefone.setter
-    def nr_telefone(self, nr_telefone):
-        self.__nr_telefone = nr_telefone
+    def nr_telefone(self, value):
+        self._nr_telefone = value
 
     @property
     def cd_cep(self):
-        return self.__cd_cep
+        return self._cd_cep
 
     @cd_cep.setter
     def cd_cep(self, cd_cep):
-        self.__cd_cep = cd_cep
+        self._cd_cep = cd_cep
 
     @property
     def ds_setor_paciente(self):
-        return self.__ds_setor_paciente
+        return self._ds_setor_paciente
 
     @ds_setor_paciente.setter
-    def ds_setor_paciente(self, ds_setor_paciente):
-        self.__ds_setor_paciente = ds_setor_paciente
+    def ds_setor_paciente(self, value):
+        self._ds_setor_paciente = value
 
     @property
     def cd_unidade(self):
-        return self.__cd_unidade
+        return self._cd_unidade
 
     @cd_unidade.setter
-    def cd_unidade(self, cd_unidade):
-        self.__cd_unidade = cd_unidade
+    def cd_unidade(self, value):
+        self._cd_unidade = value
 
     @property
     def ie_executar_leito(self):
-        return self.__ie_executar_leito
+        return self._ie_executar_leito
 
     @ie_executar_leito.setter
-    def ie_executar_leito(self, ie_executar_leito):
-        self.__ie_executar_leito = ie_executar_leito
+    def ie_executar_leito(self, value):
+        self._ie_executar_leito = value
 
     @property
     def ds_modalidade(self):
-        return self.__ds_modalidade
+        return self._ds_modalidade
 
     @ds_modalidade.setter
-    def ds_modalidade(self, ds_modalidade):
-        self.__ds_modalidade = ds_modalidade
+    def ds_modalidade(self, value):
+        self._ds_modalidade = value
 
     @property
     def na_accessionnumber(self):
-        return self.__na_accessionnumber
+        return self._na_accessionnumber
 
     @na_accessionnumber.setter
-    def na_accessionnumber(self, na_accessionnumber):
-        self.__na_accessionnumber = na_accessionnumber
+    def na_accessionnumber(self, value):
+        self._na_accessionnumber = value
 
     @property
     def ie_tipo_atendimento(self):
-        return self.__ie_tipo_atendimento
+        return self._ie_tipo_atendimento
 
     @ie_tipo_atendimento.setter
-    def ie_tipo_atendimento(self, ie_tipo_atendimento):
-        self.__ie_tipo_atendimento = ie_tipo_atendimento
+    def ie_tipo_atendimento(self, value):
+        self._ie_tipo_atendimento = value
 
     @property
     def nr_seq_proc_interno(self):
-        return self.__nr_seq_proc_interno
+        return self._nr_seq_proc_interno
 
     @nr_seq_proc_interno.setter
-    def nr_seq_proc_interno(self, nr_seq_proc_interno):
-        self.__nr_seq_proc_interno = nr_seq_proc_interno
+    def nr_seq_proc_interno(self, value):
+        self._nr_seq_proc_interno = value
 
     @property
     def cd_plano_convenio(self):
-        return self.__cd_plano_convenio
+        return self._cd_plano_convenio
 
     @cd_plano_convenio.setter
-    def cd_plano_convenio(self, cd_plano_convenio):
-        self.__cd_plano_convenio = cd_plano_convenio
+    def cd_plano_convenio(self, value):
+        self._cd_plano_convenio = value
 
     @property
     def cd_plano(self):
-        return self.__cd_plano
+        return self._cd_plano
 
     @cd_plano.setter
-    def cd_plano(self, cd_plano):
-        self.__cd_plano = cd_plano
+    def cd_plano(self, value):
+        self._cd_plano = value
 
     @property
     def cd_agenda(self):
-        return self.__cd_agenda
+        return self._cd_agenda
 
     @cd_agenda.setter
-    def cd_agenda(self, cd_agenda):
-        self.__cd_agenda = cd_agenda
+    def cd_agenda(self, value):
+        self._cd_agenda = value
 
     @property
     def ds_agenda(self):
-        return self.__ds_agenda
+        return self._ds_agenda
 
     @ds_agenda.setter
-    def ds_agenda(self, ds_agenda):
-        self.__ds_agenda = ds_agenda
+    def ds_agenda(self, value):
+        self._ds_agenda = value
 
     @property
     def cd_procedencia(self):
-        return self.__cd_procedencia
+        return self._cd_procedencia
 
     @cd_procedencia.setter
-    def cd_procedencia(self, cd_procedencia):
-        self.__cd_procedencia = cd_procedencia
+    def cd_procedencia(self, value):
+        self._cd_procedencia = value
 
     @property
     def ds_procedencia(self):
-        return self.__ds_procedencia
+        return self._ds_procedencia
 
     @ds_procedencia.setter
-    def ds_procedencia(self, ds_procedencia):
-        self.__ds_procedencia = ds_procedencia
+    def ds_procedencia(self, value):
+        self._ds_procedencia = value
 
     @property
     def cd_compl_conv(self):
-        return self.__cd_compl_conv
+        return self._cd_compl_conv
 
     @cd_compl_conv.setter
-    def cd_compl_conv(self, cd_compl_conv):
-        self.__cd_compl_conv = cd_compl_conv
+    def cd_compl_conv(self, value):
+        self._cd_compl_conv = value
 
     @property
     def dt_validade_carteira(self):
-        return self.__dt_validade_carteira
+        return self._dt_validade_carteira
 
     @dt_validade_carteira.setter
-    def dt_validade_carteira(self, dt_validade_carteira):
-        self.__dt_validade_carteira = dt_validade_carteira
+    def dt_validade_carteira(self, value):
+        self._dt_validade_carteira = value
 
     @property
     def dt_resultado(self):
-        return self.__dt_resultado
+        return self._dt_resultado
 
     @dt_resultado.setter
-    def dt_resultado(self, dt_resultado):
-        self.__dt_resultado = dt_resultado
+    def dt_resultado(self, value):
+        self._dt_resultado = value
 
     @property
     def ds_senha(self):
-        return self.__ds_senha
+        return self._ds_senha
 
     @ds_senha.setter
-    def ds_senha(self, ds_senha):
-        self.__ds_senha = ds_senha
+    def ds_senha(self, value):
+        self._ds_senha = value
 
     @property
     def nr_cpf_medico(self):
-        return self.__nr_cpf_medico
+        return self._nr_cpf_medico
 
     @nr_cpf_medico.setter
-    def nr_cpf_medico(self, nr_cpf_medico):
-        self.__nr_cpf_medico = nr_cpf_medico
+    def nr_cpf_medico(self, value):
+        self._nr_cpf_medico = value
 
     @property
     def cd_estab_atend(self):
-        return self.__cd_estab_atend
+        return self._cd_estab_atend
 
     @cd_estab_atend.setter
-    def cd_estab_atend(self, cd_estab_atend):
-        self.__cd_estab_atend = cd_estab_atend
+    def cd_estab_atend(self, value):
+        self._cd_estab_atend = value
 
     @property
     def cd_estab_prescr(self):
-        return self.__cd_estab_prescr
+        return self._cd_estab_prescr
 
     @cd_estab_prescr.setter
-    def cd_estab_prescr(self, cd_estab_prescr):
-        self.__cd_estab_prescr = cd_estab_prescr
+    def cd_estab_prescr(self, value):
+        self._cd_estab_prescr = value
 
     @property
     def dt_entrada(self):
-        return self.__dt_entrada
+        return self._dt_entrada
 
     @dt_entrada.setter
-    def dt_entrada(self, dt_entrada):
-        self.__dt_entrada = dt_entrada
+    def dt_entrada(self, value):
+        self._dt_entrada = value
 
     @property
     def ds_tipo_atendimento(self):
-        return self.__ds_tipo_atendimento
+        return self._ds_tipo_atendimento
 
     @ds_tipo_atendimento.setter
-    def ds_tipo_atendimento(self, ds_tipo_atendimento):
-        self.__ds_tipo_atendimento = ds_tipo_atendimento
+    def ds_tipo_atendimento(self, value):
+        self._ds_tipo_atendimento = value
 
     @property
     def ds_observacao_pf(self):
-        return self.__ds_observacao_pf
+        return self._ds_observacao_pf
 
     @ds_observacao_pf.setter
-    def ds_observacao_pf(self, ds_observacao_pf):
-        self.__ds_observacao_pf = ds_observacao_pf
+    def ds_observacao_pf(self, value):
+        self._ds_observacao_pf = value
 
     @property
     def ds_unidade_atend(self):
-        return self.__ds_unidade_atend
+        return self._ds_unidade_atend
 
     @ds_unidade_atend.setter
-    def ds_unidade_atend(self, ds_unidade_atend):
-        self.__ds_unidade_atend = ds_unidade_atend
+    def ds_unidade_atend(self, value):
+        self._ds_unidade_atend = value
 
     @property
     def ds_plano(self):
-        return self.__ds_plano
+        return self._ds_plano
 
     @ds_plano.setter
     def ds_plano(self, ds_plano):
-        self.__ds_plano = ds_plano
+        self._ds_plano = ds_plano
 
     @property
     def dt_admissao_hosp(self):
-        return self.__dt_admissao_hosp
+        return self._dt_admissao_hosp
 
     @dt_admissao_hosp.setter
-    def dt_admissao_hosp(self, dt_admissao_hosp):
-        self.__dt_admissao_hosp = dt_admissao_hosp
+    def dt_admissao_hosp(self, value):
+        self._dt_admissao_hosp = value
 
     @property
     def uf_medico(self):
-        return self.__uf_medico
+        return self._uf_medico
 
     @uf_medico.setter
-    def uf_medico(self, uf_medico):
-        self.__uf_medico = uf_medico
+    def uf_medico(self, value):
+        self._uf_medico = value
 
     @property
     def ds_local(self):
-        return self.__ds_local
+        return self._ds_local
 
     @ds_local.setter
-    def ds_local(self, ds_local):
-        self.__ds_local = ds_local
+    def ds_local(self, value):
+        self._ds_local = value
 
     @property
     def ds_local_exec(self):
-        return self.__ds_local_exec
+        return self._ds_local_exec
 
     @ds_local_exec.setter
-    def ds_local_exec(self, ds_local_exec):
-        self.__ds_local_exec = ds_local_exec
+    def ds_local_exec(self, value):
+        self._ds_local_exec = value
 
     @property
     def nm_medico_aten_ext(self):
-        return self.__nm_medico_aten_ext
+        return self._nm_medico_aten_ext
 
     @nm_medico_aten_ext.setter
-    def nm_medico_aten_ext(self, nm_medico_aten_ext):
-        self.__nm_medico_aten_ext = nm_medico_aten_ext
+    def nm_medico_aten_ext(self, value):
+        self._nm_medico_aten_ext = value
 
     @property
     def crm_medico_aten_ext(self):
-        return self.__crm_medico_aten_ext
+        return self._crm_medico_aten_ext
 
     @crm_medico_aten_ext.setter
-    def crm_medico_aten_ext(self, crm_medico_aten_ext):
-        self.__crm_medico_aten_ext = crm_medico_aten_ext
+    def crm_medico_aten_ext(self, value):
+        self._crm_medico_aten_ext = value
 
     @property
     def nm_social(self):
-        return self.__nm_social
+        return self._nm_social
 
     @nm_social.setter
-    def nm_social(self, nm_social):
-        self.__nm_social = nm_social
+    def nm_social(self, value):
+        self._nm_social = value
 
     @property
     def ds_email(self):
-        return self.__ds_email
+        return self._ds_email
 
     @ds_email.setter
-    def ds_email(self, ds_email):
-        self.__ds_email = ds_email
+    def ds_email(self, value):
+        self._ds_email = value
 
     @property
     def nm_sobrenome_pai(self):
-        return self.__nm_sobrenome_pai
+        return self._nm_sobrenome_pai
 
     @nm_sobrenome_pai.setter
     def nm_sobrenome_pai(self, value):
-        self.__nm_sobrenome_pai = value
+        self._nm_sobrenome_pai = value
 
     @property
     def nm_sobrenome_mae(self):
-        return self.__nm_sobrenome_mae
+        return self._nm_sobrenome_mae
 
     @nm_sobrenome_mae.setter
     def nm_sobrenome_mae(self, value):
-        self.__nm_sobrenome_mae = value
+        self._nm_sobrenome_mae = value
 
     @property
     def nm_primeiro_nome(self):
-        return self.__nm_primeiro_nome
+        return self._nm_primeiro_nome
 
     @nm_primeiro_nome.setter
     def nm_primeiro_nome(self, value):
-        self.__nm_primeiro_nome = value
+        self._nm_primeiro_nome = value
 
     @property
     def cancelado(self):
-        return self.__cancelado
+        return self._cancelado
+
+    @cancelado.setter
+    def cancelado(self, value):
+        self._cancelado = value
