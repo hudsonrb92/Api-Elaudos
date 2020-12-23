@@ -157,6 +157,9 @@ def inserir_exame(exame):
         crm_medico_aten_ext=exame.crm_medico_aten_ext,
         nm_social=exame.nm_social,
         ds_email=exame.ds_email,
+        nm_sobrenome_pai=exame.nm_sobrenome_pai,
+        nm_sobrenome_mae=exame.nm_sobrenome_mae,
+        nm_primeiro_nome=exame.nm_primeiro_nome,
         identificador_estudo_dicom=identificador_novo_estudo,
     )
     db.session.add(exame_novo)
