@@ -319,9 +319,9 @@ class IntegracaoTasy:
         return self._ds_procedimento
 
     @ds_procedimento.setter
-    def ds_procedimento(self, ds_procedimento):
+    def ds_procedimento(self, value):
         if value:
-            self._ds_procedimento = ds_procedimento.upper()
+            self._ds_procedimento = value.upper()
 
     @property
     def ie_lado(self):
