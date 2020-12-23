@@ -232,7 +232,7 @@ class IntegracaoTasy:
         self._ds_senha = ds_senha
         self._nr_cpf_medico = nr_cpf_medico
         self._cd_estab_atend = cd_estab_atend
-        self._cd_estab_prescr = cd_estab_prescr)
+        self._cd_estab_prescr = cd_estab_prescr
         self._dt_entrada = dt_entrada
         self._ds_tipo_atendimento = ds_tipo_atendimento
         self._ds_observacao_pf = ds_observacao_pf
