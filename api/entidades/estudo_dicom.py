@@ -197,8 +197,9 @@ class EstudoDicom:
         self._accessionnumber = str(accessionnumber)
 
     @patientname.setter
-    def patientname(self, patientname):
-        self._patientname = patientname.upper()
+    def patientname(self, value):
+        if value:
+            self._patientname = value.upper()
 
     @patientid.setter
     def patientid(self, patientid):
