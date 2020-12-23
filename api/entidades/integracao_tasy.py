@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta
 class IntegracaoTasy:
     """Class to manage interations with table integracao_tasy"""
 
-    def _init_(
+    def __init__(
         self,
         nr_atendimento: int,
         nr_prescricao: int,
@@ -113,12 +113,12 @@ class IntegracaoTasy:
         cd_estab_prescr: Optional[str] = "",
         dt_entrada: Optional[datetime] = None,
         ds_tipo_atendimento: Optional[str] = "",
-        ds_observacao_pf: Optional[str] = "",
-        ds_unidade_atend: Optional[str] = "",
-        ds_plano: Optional[str] = "",
         dt_admissao_hosp: Optional[str] = "",
         uf_medico: Optional[str] = "",
         ds_local: Optional[str] = "",
+        ds_observacao_pf: Optional[str] = "",
+        ds_unidade_atend: Optional[str] = "",
+        ds_plano: Optional[str] = "",
         ds_local_exec: Optional[str] = "",
         nm_medico_aten_ext: Optional[str] = "",
         crm_medico_aten_ext: Optional[str] = "",
@@ -1112,8 +1112,8 @@ class IntegracaoTasy:
         return self._ds_plano
 
     @ds_plano.setter
-    def ds_plano(self, ds_plano):
-        self._ds_plano = ds_plano
+    def ds_plano(self, value):
+        self._ds_plano = value
 
     @property
     def dt_admissao_hosp(self):
