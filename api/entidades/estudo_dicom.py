@@ -145,12 +145,12 @@ class EstudoDicom:
         return self._medico_dir
 
     @studytime.setter
-    def studytime(self, studytime):
-        if isinstance(studytime, str):
-            self._studytime = studytime
-        elif isinstance(studytime, time) or isinstance(studytime, datetime):
-            studytime = f"{studytime.hour:02}:{studytime.minute:02}{studytime.second:02}"
-            self._studytime = studytime
+    def studytime(self, value):
+        if isinstance(value, str):
+            self._studytime = value
+        elif isinstance(value, time) or isinstance(value, datetime):
+            value = f"{value.hour:02}:{value.minute:02}{value.second:02}"
+            self._studytime = value
         else:
             self._studytime = None
 
@@ -193,8 +193,8 @@ class EstudoDicom:
             self._studyinstanceuid = value
 
     @accessionnumber.setter
-    def accessionnumber(self, accessionnumber):
-        self._accessionnumber = str(accessionnumber)
+    def accessionnumber(self, value):
+        self._accessionnumber = str(value)
 
     @patientname.setter
     def patientname(self, value):
@@ -240,8 +240,8 @@ class EstudoDicom:
         self._numero_exames_ris = numero_exames_ris
 
     @situacao.setter
-    def situacao(self, situacao):
-        self._situacao = situacao
+    def situacao(self, value):
+        self._situacao = value
 
     @medico_sol.setter
     def medico_sol(self, medico_sol):

@@ -1,6 +1,8 @@
 from sqlalchemy import or_
 
 from ..models import estudo_dicom_model, integracao_tasy_model
+from ..entidades.estudo_dicom import EstudoDicom
+from typing import Union
 from api import db, logger
 
 itm = integracao_tasy_model.IntegracaoTasyModel
@@ -46,7 +48,7 @@ def listar_estudos_sem_laudos(identificador_estabelecimento_saude):
     return estudos
 
 
-def insert_on_taas(estudo):
+def insert_on_taas(estudo: EstudoDicom) -> estudo_dicom_model.EstudoDicomModel:
     edm = estudo_dicom_model.EstudoDicomModel
     exame = check_if_already_exists(estudo)
     if not exame:
@@ -81,10 +83,11 @@ def insert_on_taas(estudo):
             logger.error(f"Um erro ocorreu ao tentar cadastrar {estudo.accessionnumber} {expt}")
             raise Exception(f"Um erro ocorreu ao tentar cadastrar {expt} {estudo.accessionnumber}")
     else:
-        raise Exception("Erro ao tentar fazer o cadastro.")
+        logger.info(f'Exame já existente -> {exame.identificador}')
+        raise NotImplementedError(f'Exame já cadastrado {exame.identificador}')
 
 
-def check_if_already_exists(estudo):
+def check_if_already_exists(estudo: EstudoDicom) -> Union[estudo_dicom_model.EstudoDicomModel, None]:
     logger.info(f"Verificando se exame já existe id:{estudo.patientid}  accession: {estudo.accessionnumber}")
     edm = estudo_dicom_model.EstudoDicomModel
     exame = (

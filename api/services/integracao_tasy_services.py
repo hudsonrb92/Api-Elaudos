@@ -15,6 +15,7 @@ estmod = estudo_dicom_model.EstudoDicomModel
 def inserir_exame(exame):
     logger.info(f"Cadastrando exame {exame.nr_prescricao}{exame.nr_sequencia}")
     identificador_solicitante = None
+    # Faz-se verificação se exame já existe, caso exista retorna false para que na validação é testado um bool
     if verifica_se_ja_existe(exame):
         return False
     # Verifica se médico existe, se não existir é criado.

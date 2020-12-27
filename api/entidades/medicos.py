@@ -11,7 +11,6 @@ class Medicos:
         Required ->
             crm: [str, int] = 1º"<UF><NºCMR>" || 2º "<NºCMR><UF>" || 3º <NºCMR>
             **3º Require UF filled
-            Session: "Sqlalchemy session" = session
         Optionals ->
             Nome: str = "Doctors name"
             uf: str = "UF" 2 digits only more or less will raise a except
@@ -30,8 +29,8 @@ class Medicos:
                  identificador_estabelecimento_saude: Optional[int] = id_estab,
                  perfil: Optional[str] = 'ROLE_MEDICO_SOLICITANTE'
                  ) -> None:
-        self.nome = nome.upper() if nome else nome
-        self.crm = str(crm)
+        self.nome = nome
+        self.crm = crm
         self.uf = uf if uf else crm
         self.assinatura = assinatura
         self.login = login if login else f"{self._uf.lower()}{self._crm}"
@@ -44,17 +43,19 @@ class Medicos:
 
     @crm.setter
     def crm(self, value):
+        if isinstance(value, int):
+            value = str(value)
         value = (''.join(filter(str.isdigit, value)) or None,
                  ''.join(filter(str.isalpha, value)) or None)
         self._crm = str(value[0])
 
     @property
     def uf(self):
-        return self._uf.upper()
+        return self._uf
 
     @uf.setter
     def uf(self, value):
-        if isinstance(value, str) and len(value) == 2:
+        if isinstance(value, str):
             try:
                 value = (''.join(filter(str.isdigit, value)) or None,
                          ''.join(filter(str.isalpha, value)) or None)[1]
@@ -69,8 +70,11 @@ class Medicos:
         return self._nome
 
     @nome.setter
-    def nome(self, nome):
-        self._nome = nome
+    def nome(self, value):
+        if value:
+            self._nome = value.upper()
+        else:
+            self._nome = ""
 
     @property
     def assinatura(self):

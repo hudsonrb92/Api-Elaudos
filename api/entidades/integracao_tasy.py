@@ -1,5 +1,5 @@
 """Class to manage table integracao tasy"""
-from typing import Optional
+from typing import Optional, Union
 from datetime import date, datetime, timedelta
 
 
@@ -8,9 +8,9 @@ class IntegracaoTasy:
 
     def __init__(
         self,
-        nr_atendimento: int,
-        nr_prescricao: int,
-        nr_sequencia: int,
+        nr_atendimento: Union[int, str],
+        nr_prescricao: Union[int, str],
+        nr_sequencia: Union[int, str],
         nr_seq_interno: Optional[int] = None,
         nr_acess_number: Optional[int] = None,
         cd_proced_tasy: Optional[str] = "",
