@@ -15,32 +15,34 @@ estmod = estudo_dicom_model.EstudoDicomModel
 def inserir_exame(exame):
     logger.info(f"Cadastrando exame {exame.nr_prescricao}{exame.nr_sequencia}")
     identificador_solicitante = None
-    # Faz-se verificação se exame já existe, caso exista retorna false para que na validação é testado um bool
-    if verifica_se_ja_existe(exame):
-        return False
-    # Verifica se médico existe, se não existir é criado.
     try:
         medico_entidade = medico(crm=exame.nr_crm, uf=exame.uf_medico, nome=exame.nm_medico)
         medico_novo = cadastra_medico(medico_entidade)
         identificador_solicitante = medico_novo.identificador
     except Exception as excp:
         logger.error(f"Um erro ocorreu ao tentar cadastrar medico {excp}")
+    # Faz-se verificação se exame já existe, caso exista retorna false para que na validação é testado um bool
+    if verifica_se_ja_existe(exame):
+        exame = verifica_se_ja_existe(exame)
+        identificador_novo_estudo = exame.identificador
+    # Verifica se médico existe, se não existir é criado.
+    else:
+        estudo_entidade = estudo(
+            patientname=exame.nm_social,
+            patientbirthdate=exame.dt_nascimento,
+            patientid=exame.nr_prontuario,
+            studydescription=exame.ds_procedimento[0:64],
+            studydate=exame.dt_liberacao,
+            accessionnumber=f"{exame.nr_prescricao}{exame.nr_sequencia}",
+            modalitiesinstudy=modalidade(exame.ds_modalidade),
+            studytime=exame.dt_liberacao[-8:],
+            patientsex=exame.ie_sexo,
+            medico_sol=identificador_solicitante,
+            studyinstanceuid=str(uuid4()),
+        )
+        estudo_novo = insert_on_taas(estudo_entidade)
+        identificador_novo_estudo = estudo_novo.identificador if estudo_novo else None
 
-    estudo_entidade = estudo(
-        patientname=exame.nm_social,
-        patientbirthdate=exame.dt_nascimento,
-        patientid=exame.nr_prontuario,
-        studydescription=exame.ds_procedimento[0:64],
-        studydate=exame.dt_liberacao,
-        accessionnumber=f"{exame.nr_prescricao}{exame.nr_sequencia}",
-        modalitiesinstudy=modalidade(exame.ds_modalidade),
-        studytime=exame.dt_liberacao[-8:],
-        patientsex=exame.ie_sexo,
-        medico_sol=identificador_solicitante,
-        studyinstanceuid=str(uuid4()),
-    )
-    estudo_novo = insert_on_taas(estudo_entidade)
-    identificador_novo_estudo = estudo_novo.identificador if estudo_novo else None
     exame_novo = itm(
         nr_atendimento=exame.nr_atendimento,
         nr_prescricao=exame.nr_prescricao,

@@ -84,7 +84,7 @@ def insert_on_taas(estudo: EstudoDicom) -> estudo_dicom_model.EstudoDicomModel:
             raise Exception(f"Um erro ocorreu ao tentar cadastrar {expt} {estudo.accessionnumber}")
     else:
         logger.info(f'Exame já existente -> {exame.identificador}')
-        raise NotImplementedError(f'Exame já cadastrado {exame.identificador}')
+        raise TypeError(f'Exame já cadastrado {exame.identificador}')
 
 
 def check_if_already_exists(estudo: EstudoDicom) -> Union[estudo_dicom_model.EstudoDicomModel, None]:
