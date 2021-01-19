@@ -44,7 +44,7 @@ def inserir_exame(exame: IntegracaoTasy) -> IntegracaoTasyModel:
         medico_sol=identificador_solicitante,
         studyinstanceuid=str(uuid4()),
     )
-    if verifica_se_ja_existe(exame):
+    if busca_estudo_dicom(exame):
         logger.info('Existe exame no estudo dicom.')
         identificador_novo_estudo = verifica_se_ja_existe(exame)
     else:
