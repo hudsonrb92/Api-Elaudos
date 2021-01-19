@@ -1,5 +1,8 @@
+from typing import Union
+
 from ..entidades import estudo_dicom, medicos
 from ..models import integracao_tasy_model, estudo_dicom_model
+from ..models.estudo_dicom_model import EstudoDicomModel
 from ..services.tools import modalidade
 from ..services.medicos_services import cadastra_medico
 from ..services.estudo_dicom_service import insert_on_taas
@@ -23,8 +26,9 @@ def inserir_exame(exame):
         logger.error(f"Um erro ocorreu ao tentar cadastrar medico {excp}")
     # Faz-se verificação se exame já existe, caso exista retorna false para que na validação é testado um bool
     if verifica_se_ja_existe(exame):
-        exame = verifica_se_ja_existe(exame)
-        identificador_novo_estudo = exame.identificador
+        logger.info(f'Exame já existe {exame}')
+        exame_novo = verifica_se_ja_existe(exame)
+        identificador_novo_estudo = exame_novo.identificador
     # Verifica se médico existe, se não existir é criado.
     else:
         estudo_entidade = estudo(
@@ -175,8 +179,8 @@ def inserir_exame(exame):
     return exame_novo
 
 
-def verifica_se_ja_existe(exame):
-    existe = itm.query.filter(itm.nr_prescricao == exame.nr_prescricao, itm.nr_sequencia == exame.nr_sequencia).first()
+def verifica_se_ja_existe(exame) -> Union[EstudoDicomModel, None]:
+    existe: Union[EstudoDicomModel, None] = itm.query.filter(itm.nr_prescricao == exame.nr_prescricao, itm.nr_sequencia == exame.nr_sequencia).first()
     return existe
 
 
