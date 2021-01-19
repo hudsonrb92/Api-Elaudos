@@ -1,8 +1,10 @@
 from typing import Union
 
 from ..entidades import estudo_dicom, medicos
+from ..entidades.integracao_tasy import IntegracaoTasy
 from ..models import integracao_tasy_model, estudo_dicom_model
 from ..models.estudo_dicom_model import EstudoDicomModel
+from ..models.integracao_tasy_model import IntegracaoTasyModel
 from ..services.tools import modalidade
 from ..services.medicos_services import cadastra_medico
 from ..services.estudo_dicom_service import insert_on_taas
@@ -15,7 +17,8 @@ estudo = estudo_dicom.EstudoDicom
 estmod = estudo_dicom_model.EstudoDicomModel
 
 
-def inserir_exame(exame):
+def inserir_exame(exame: IntegracaoTasy) -> IntegracaoTasyModel:
+    # logger de verificação
     logger.info(f"Cadastrando exame {exame.nr_prescricao}{exame.nr_sequencia}")
     identificador_solicitante = None
     try:
@@ -26,24 +29,26 @@ def inserir_exame(exame):
         logger.error(f"Um erro ocorreu ao tentar cadastrar medico {excp}")
     # Faz-se verificação se exame já existe, caso exista retorna false para que na validação é testado um bool
     if verifica_se_ja_existe(exame):
-        logger.info(f'Exame já existe {exame}')
-        exame_novo = verifica_se_ja_existe(exame)
-        identificador_novo_estudo = exame_novo.identificador
-    # Verifica se médico existe, se não existir é criado.
+        return verifica_se_ja_existe(exame)
+
+    estudo_entidade = estudo(
+        patientname=exame.nm_social,
+        patientbirthdate=exame.dt_nascimento,
+        patientid=exame.nr_prontuario,
+        studydescription=exame.ds_procedimento[0:64],
+        studydate=exame.dt_liberacao,
+        accessionnumber=f"{exame.nr_prescricao}{exame.nr_sequencia}",
+        modalitiesinstudy=modalidade(exame.ds_modalidade),
+        studytime=exame.dt_liberacao[-8:],
+        patientsex=exame.ie_sexo,
+        medico_sol=identificador_solicitante,
+        studyinstanceuid=str(uuid4()),
+    )
+    if verifica_se_ja_existe(exame):
+        logger.info('Existe exame no estudo dicom.')
+        identificador_novo_estudo = verifica_se_ja_existe(exame)
     else:
-        estudo_entidade = estudo(
-            patientname=exame.nm_social,
-            patientbirthdate=exame.dt_nascimento,
-            patientid=exame.nr_prontuario,
-            studydescription=exame.ds_procedimento[0:64],
-            studydate=exame.dt_liberacao,
-            accessionnumber=f"{exame.nr_prescricao}{exame.nr_sequencia}",
-            modalitiesinstudy=modalidade(exame.ds_modalidade),
-            studytime=exame.dt_liberacao[-8:],
-            patientsex=exame.ie_sexo,
-            medico_sol=identificador_solicitante,
-            studyinstanceuid=str(uuid4()),
-        )
+        logger.info('Criando estudo dicom')
         estudo_novo = insert_on_taas(estudo_entidade)
         identificador_novo_estudo = estudo_novo.identificador if estudo_novo else None
 
@@ -179,8 +184,9 @@ def inserir_exame(exame):
     return exame_novo
 
 
-def verifica_se_ja_existe(exame) -> Union[EstudoDicomModel, None]:
-    existe: Union[EstudoDicomModel, None] = itm.query.filter(itm.nr_prescricao == exame.nr_prescricao, itm.nr_sequencia == exame.nr_sequencia).first()
+def verifica_se_ja_existe(exame) -> Union[IntegracaoTasyModel, None]:
+    existe: Union[IntegracaoTasyModel, None] = itm.query.filter(itm.nr_prescricao == exame.nr_prescricao,
+                                                                itm.nr_sequencia == exame.nr_sequencia).first()
     return existe
 
 
@@ -237,3 +243,9 @@ def altera_integrado_tasy(accession):
     sttmt.update({itm.criado_worklist: True}, synchronize_session=False)
     db.session.commit()
     return sttmt.first()
+
+
+def busca_estudo_dicom(exame: IntegracaoTasy) -> Union[None, EstudoDicomModel]:
+    accss = f'{exame.nr_prescricao}{exame.nr_sequencia}'
+    sttmt = estmod.query.filter(estmod.accessionnumber == accss).first()
+    return sttmt
