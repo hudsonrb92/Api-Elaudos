@@ -526,7 +526,7 @@ class IntegracaoTasy:
 
     @nr_identidade_paciente.setter
     def nr_identidade_paciente(self, value):
-        self._nr_identidade_paciente = value[0:64]
+        self._nr_identidade_paciente = value[0:64] if value else None
 
     @property
     def nr_prontuario_paciente(self):
@@ -590,7 +590,7 @@ class IntegracaoTasy:
 
     @nr_telefone_paciente.setter
     def nr_telefone_paciente(self, value):
-        self._nr_telefone_paciente = value[0:64]
+        self._nr_telefone_paciente = value[0:64] if value else None
 
     @property
     def cd_convenio(self):
@@ -606,7 +606,7 @@ class IntegracaoTasy:
 
     @ds_categoria_convenio.setter
     def ds_categoria_convenio(self, value):
-        self._ds_categoria_convenio = value[0:64]
+        self._ds_categoria_convenio = value[0:64] if value else None
 
     @property
     def ds_convenio(self):
@@ -614,7 +614,7 @@ class IntegracaoTasy:
 
     @ds_convenio.setter
     def ds_convenio(self, value):
-        self._ds_convenio = value[0:64]
+        self._ds_convenio = value[0:64] if value else None
 
     @property
     def cd_cgc(self):
@@ -638,7 +638,7 @@ class IntegracaoTasy:
 
     @ds_motivo_atend.setter
     def ds_motivo_atend(self, value):
-        self._ds_motivo_atend = value[0:64]
+        self._ds_motivo_atend = value[0:64] if value else None
 
     @property
     def ds_motivo_suspensao(self):
@@ -646,7 +646,7 @@ class IntegracaoTasy:
 
     @ds_motivo_suspensao.setter
     def ds_motivo_suspensao(self, value):
-        self._ds_motivo_suspensao = value[0:64]
+        self._ds_motivo_suspensao = value[0:64] if value else None
 
     @property
     def cd_pessoa_fisica(self):
@@ -694,7 +694,7 @@ class IntegracaoTasy:
 
     @nm_usuario.setter
     def nm_usuario(self, value):
-        self._nm_usuario = value[0:64]
+        self._nm_usuario = value[0:64] if value else None
 
     @property
     def ds_observacao(self):
@@ -702,7 +702,7 @@ class IntegracaoTasy:
 
     @ds_observacao.setter
     def ds_observacao(self, value):
-        self._ds_observacao = value[0:64]
+        self._ds_observacao = value[0:64] if value else None
 
     @property
     def ie_origem_proced(self):
@@ -718,7 +718,7 @@ class IntegracaoTasy:
 
     @ds_dado_clinico.setter
     def ds_dado_clinico(self, value):
-        self._ds_dado_clinico = value[0:64]
+        self._ds_dado_clinico = value[0:64] if value else None
 
     @property
     def ie_suspenso(self):
@@ -910,7 +910,7 @@ class IntegracaoTasy:
 
     @nr_telefone.setter
     def nr_telefone(self, value):
-        self._nr_telefone = value[0:64]
+        self._nr_telefone = value[0:64] if value else None
 
     @property
     def cd_cep(self):
@@ -926,7 +926,7 @@ class IntegracaoTasy:
 
     @ds_setor_paciente.setter
     def ds_setor_paciente(self, value):
-        self._ds_setor_paciente = value[0:64]
+        self._ds_setor_paciente = value[0:64] if value else None
 
     @property
     def cd_unidade(self):
@@ -1006,7 +1006,7 @@ class IntegracaoTasy:
 
     @ds_agenda.setter
     def ds_agenda(self, value):
-        self._ds_agenda = value[0:64]
+        self._ds_agenda = value[0:64] if value else None
 
     @property
     def cd_procedencia(self):
@@ -1022,7 +1022,7 @@ class IntegracaoTasy:
 
     @ds_procedencia.setter
     def ds_procedencia(self, value):
-        self._ds_procedencia = value[0:64]
+        self._ds_procedencia = value[0:64] if value else None
 
     @property
     def cd_compl_conv(self):
@@ -1038,7 +1038,7 @@ class IntegracaoTasy:
 
     @dt_validade_carteira.setter
     def dt_validade_carteira(self, value):
-        self._dt_validade_carteira = value[0:64]
+        self._dt_validade_carteira = value[0:64] if value else None
 
     @property
     def dt_resultado(self):
@@ -1046,7 +1046,7 @@ class IntegracaoTasy:
 
     @dt_resultado.setter
     def dt_resultado(self, value):
-        self._dt_resultado = value[0:64]
+        self._dt_resultado = value[0:64] if value else None
 
     @property
     def ds_senha(self):
@@ -1054,7 +1054,7 @@ class IntegracaoTasy:
 
     @ds_senha.setter
     def ds_senha(self, value):
-        self._ds_senha = value[0:64]
+        self._ds_senha = value[0:64] if value else None
 
     @property
     def nr_cpf_medico(self):
@@ -1094,7 +1094,7 @@ class IntegracaoTasy:
 
     @ds_tipo_atendimento.setter
     def ds_tipo_atendimento(self, value):
-        self._ds_tipo_atendimento = value[0:64]
+        self._ds_tipo_atendimento = value[0:64] if value else None
 
     @property
     def ds_observacao_pf(self):
@@ -1102,7 +1102,7 @@ class IntegracaoTasy:
 
     @ds_observacao_pf.setter
     def ds_observacao_pf(self, value):
-        self._ds_observacao_pf = value[0:64]
+        self._ds_observacao_pf = value[0:64] if value else None
 
     @property
     def ds_unidade_atend(self):
@@ -1110,7 +1110,7 @@ class IntegracaoTasy:
 
     @ds_unidade_atend.setter
     def ds_unidade_atend(self, value):
-        self._ds_unidade_atend = value[0:64]
+        self._ds_unidade_atend = value[0:64] if value else None
 
     @property
     def ds_plano(self):
@@ -1118,7 +1118,7 @@ class IntegracaoTasy:
 
     @ds_plano.setter
     def ds_plano(self, value):
-        self._ds_plano = value[0:64]
+        self._ds_plano = value[0:64] if value else None
 
     @property
     def dt_admissao_hosp(self):
@@ -1126,7 +1126,7 @@ class IntegracaoTasy:
 
     @dt_admissao_hosp.setter
     def dt_admissao_hosp(self, value):
-        self._dt_admissao_hosp = value[0:64]
+        self._dt_admissao_hosp = value[0:64] if value else None
 
     @property
     def uf_medico(self):
@@ -1142,7 +1142,7 @@ class IntegracaoTasy:
 
     @ds_local.setter
     def ds_local(self, value):
-        self._ds_local = value[0:64]
+        self._ds_local = value[0:64] if value else None
 
     @property
     def ds_local_exec(self):
@@ -1150,7 +1150,7 @@ class IntegracaoTasy:
 
     @ds_local_exec.setter
     def ds_local_exec(self, value):
-        self._ds_local_exec = value[0:64]
+        self._ds_local_exec = value[0:64] if value else None
 
     @property
     def nm_medico_aten_ext(self):
@@ -1158,7 +1158,7 @@ class IntegracaoTasy:
 
     @nm_medico_aten_ext.setter
     def nm_medico_aten_ext(self, value):
-        self._nm_medico_aten_ext = value[0:64]
+        self._nm_medico_aten_ext = value[0:64] if value else None
 
     @property
     def crm_medico_aten_ext(self):
