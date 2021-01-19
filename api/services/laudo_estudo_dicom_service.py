@@ -12,7 +12,7 @@ def listar_laudos(identificador_estabelecimento_saude):
             lem.identificador_estudo_dicom == edm.identificador,
         )
         .filter(edm.accessionnumber != None)
-        .filter(lem.integrado == False)
+        .filter(lem.integrado == False, lem.situacao == 'D')
     )
     estudos = sttmnt.all()
     return estudos
